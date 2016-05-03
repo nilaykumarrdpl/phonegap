@@ -177,7 +177,7 @@
             #load_light .loading_image img{margin:0 auto!important;padding-left: 5%;}
             .left-icon-area-sec .header-minicart a.skip-cart.no-count {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;}
             .button.search-button .fa.fa-search {    margin-top: 3px;}
-            #load_light .loading_image {    position: absolute;    top: 40% !important; width:100%;}
+            #load_light .loading_image {    position: absolute;    top: 25% !important; width:100%;}
             .loading_image span {color: #000!important;display: block;    text-align: center !important;    width: 100%;font-family: Verdana,Arial,sans-serif;font-size: 12px;line-height: 1.5; margin-top:-3px;}
             body .login_access{width:280px !important;  }
             .loader-div{z-index:99;}
@@ -229,21 +229,40 @@
                 </div>
                 <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
                     <div class="loading_image">
+                    <div class="progress-bar-validation" style="display:none;">
                     <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
                     <span> Loading... Please wait </span>
-                    <button onClick="connectSocialLogin()">Facebook Login</button>
-                    <img id="image" style="position:absolute; top:10px; left:10px" src="" />
-                    <p id="feedback">not logged in</p>
-                    <button onclick="isAvailable()">Available?</button>
-                    <br/><br/>
-                    <button onclick="login()">Login with Google+</button>
-                    <br/><br/>
-                    <button onclick="trySilentLogin()">Try silent login with Google+</button>
-                    <br/><br/>
-                    <button onclick="logout()">Logout</button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button onclick="disconnect()">Disconnect</button>
-                    <br/><br/>
+                    </div>
+                    <button onClick="connectSocialLogin()">Facebook Login</button> <br /><br /> OR <br /><br />
+                    <form id="login-access-form" method="post" name="login-access-form">
+                      <span>Members Login Here</span>
+                      <input type="hidden" name="form_type" value="signin" />
+                      <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
+                      <input type="password" placeholder="Password" name="password" required><br /><br />
+                      <button id="submit" name="submit" title="sigin" class="button" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
+                    </form>
+                    <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
+                      <span>Forgot Your Password?</span>
+                      <input type="hidden" name="form_type" value="forgot-password" />
+                      <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
+                      <span class="signin-error"></span>
+                      <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
+                    </form>
+                    <form id="register-form" method="post" name="register-form" style="display:none;">
+                      <span>Register Here</span>
+                      <input type="hidden" name="form_type" value="register" />
+                      <input type="text" name="firstname" id="firstname" value="" placeholder="First Name" required><br />
+                      <input type="text" name="lastname" id="lastname" value="" placeholder="Last Name" required><br />
+                      <input type="text" name="mobile" id="mobile" value="" placeholder="Mobile Number" required><br />
+                      <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
+                      <input type="password" placeholder="Password" id="password" required=""><br />
+                      <input type="password" placeholder="Confirm Password" id="confirm_password" required=""><br />
+                      <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
+                    </form>
+                    <br />
+                      <a id="login-access-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>&nbsp;
+                      <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>&nbsp;
+                      <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
                     </div>
                 </div>
             </div>
@@ -256,64 +275,25 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-            function isAvailable() {
-                window.plugins.googleplus.isAvailable(function(avail) {alert(avail)});
-              }
-              function login() {
-                window.plugins.googleplus.login(
-                    {
-                        'webClientId': '573670661235-0q3cht6ai2hipolv9p5auk2dbe75voj3.apps.googleusercontent.com',
-                        'offline': true,
-                    },
-                    function (obj) {
-                        alert(JSON.stringify(obj));
-                      document.querySelector("#image").src = obj.imageUrl;
-                      document.querySelector("#image").style.visibility = 'visible';
-                      document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
-                    },
-                    function (msg) {
-                      document.querySelector("#feedback").innerHTML = "error: " + msg;
-                    }
-                );
-              }
-              function trySilentLogin() {
-                window.plugins.googleplus.trySilentLogin(
-                    {},
-                    function (obj) {
-                      document.querySelector("#image").src = obj.imageUrl;
-                      document.querySelector("#image").style.visibility = 'visible';
-                      document.querySelector("#feedback").innerHTML = "Silent hi, " + obj.displayName + ", " + obj.email;
-                    },
-                    function (msg) {
-                      document.querySelector("#feedback").innerHTML = "error: " + msg;
-                    }
-                );
-              }
-              function logout() {
-                window.plugins.googleplus.logout(
-                    function (msg) {
-                      document.querySelector("#image").style.visibility = 'hidden';
-                      document.querySelector("#feedback").innerHTML = msg;
-                    }
-                );
-              }
-              function disconnect() {
-                window.plugins.googleplus.disconnect(
-                    function (msg) {
-                      document.querySelector("#image").style.visibility = 'hidden';
-                      document.querySelector("#feedback").innerHTML = msg;
-                    }
-                );
-              }
-              window.onerror = function(what, line, file) {
-                alert(what + '; ' + line + '; ' + file);
-              };
-              function handleOpenURL (url) {
-                document.querySelector("#feedback").innerHTML = "App was opened by URL: " + url;
-              }
         </script>
         <script type="text/javascript" charset="utf-8">
-
+        $(document).ready(function(){
+            $('#forgot-password-link').click(function(){
+                $('#register-form').hide();
+                $('#login-access-form').hide();
+                $('#forgot-password-form').show();
+            });
+            $('#register-link').click(function(){
+                $('#register-form').show();
+                $('#login-access-form').hide();
+                $('#forgot-password-form').hide();
+            });
+            $('#login-access-link').click(function(){
+                $('#register-form').hide();
+                $('#login-access-form').show();
+                $('#forgot-password-form').hide();
+            });
+        });
         // Call onDeviceReady when Cordova is loaded.
         //
         // At this point, the document has loaded but cordova-1.7.0.js has not.
@@ -420,8 +400,6 @@
             else {
               alert("Successfully data recived");
               //onload, call loadIframe() function
-                $('.loader-iframe').css("display", "block");
-                $( ".loader-div" ).remove();
                 /*var id = 'container';
                 var parentElement = document.getElementById(id);
                 var listeningElement = parentElement.querySelector('.loader-div');
@@ -438,15 +416,6 @@
             }        
           //alert( 'hello'+data.message );
         }
-        function loadIframe(email){
-            var iframeURL = 'http://54.169.245.192/kazo/autoLogin.php';
-            var iframeID = 'MyIFrame';
-            var password = '12345678';
-
-            //setiFrame's SRC attribute
-            var iFrameWin = document.getElementById(iframeID);
-            iFrameWin.src = iframeURL + "?email="+email+"&password="+password;
-        }
         function connectSocialLogin() {
                 alert('ahhaa');
                 //$('.loader-iframe').addClass('video');
@@ -455,8 +424,85 @@
                     function (error) { alert("" + error) }
                 );
         }
+        
+        function connectByEmail() {
+                //alert('ahhaa');
+                $('.progress-bar-validation').show();
+                var formId = '#login-access-form';
+                var form = $(formId); 
+                var params = form.serialize();
+                //alert(params);
+                $.ajax({
+                  type: 'GET',
+                  url: 'http://54.169.245.192/kazo/script/gcm/connectedByEmail.php',
+                  dataType: 'jsonp',
+                  async: false,
+                  jsonpCallback: 'jsoncallbackConnectedByEmail',
+                  crossDomain: true,
+                  data: params,
+                  cache: false,
+                });                 
+        }
+        function sendPasswordByEmail() {
+                alert('forgot-password-form');
+                var formId = '#forgot-password-form';
+                var form = $(formId); 
+                var params = form.serialize();
+                alert(params);
+                $.ajax({
+                  type: 'GET',
+                  url: 'http://54.169.245.192/kazo/script/gcm/connectedByEmail.php',
+                  dataType: 'jsonp',
+                  async: false,
+                  jsonpCallback: 'jsoncallbackConnectedByEmail',
+                  crossDomain: true,
+                  data: params,
+                  cache: false,
+                });                 
+        }
+        function registerByEmail() {
+                //alert('register-form');
+                var formId = '#register-form';
+                var form = $(formId); 
+                var params = form.serialize();
+                alert(params);
+                $.ajax({
+                  type: 'GET',
+                  url: 'http://54.169.245.192/kazo/script/gcm/connectedByEmail.php',
+                  dataType: 'jsonp',
+                  async: false,
+                  jsonpCallback: 'jsoncallbackConnectedByEmail',
+                  crossDomain: true,
+                  data: params,
+                  cache: false,
+                });                 
+        }
+        
+        function jsoncallbackConnectedByEmail(data) {
+            //alert('Recieved');
+            //alert(JSON.stringify(data));
+            $('.progress-bar-validation').hide();
+            if(!data.error) {
+                //alert(data.htmlData.email);
+                loadIframe(data.htmlData.email);
+            } else {
+                alert(data.htmlData);
+            }
+        }
+        
+        function loadIframe(email){
+            $('.loader-iframe').css("display", "block");
+            $( ".loader-div" ).remove();
+        
+            var iframeURL = 'http://54.169.245.192/kazo/autoLogin.php';
+            var iframeID = 'MyIFrame';
+            var password = '12345678';
 
-
+            //setiFrame's SRC attribute
+            var iFrameWin = document.getElementById(iframeID);
+            iFrameWin.src = iframeURL + "?email="+email+"&password="+password;
+            //alert(iFrameWin.src);
+        }
 
         function checkConnection() {
             var  networkConnectionType =  navigator.network.connection.type;
