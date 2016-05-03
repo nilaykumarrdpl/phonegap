@@ -36,6 +36,9 @@
   <gap:plugin name="org.apache.cordova.network-information"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
+  <gap:plugin name="cordova-plugin-googleplus" source="npm">
+      <param name="REVERSED_CLIENT_ID" value="573670661235-0q3cht6ai2hipolv9p5auk2dbe75voj3.apps.googleusercontent.com" />
+  </gap:plugin>
   <icon src="icon.png"/>
   <icon src="res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
