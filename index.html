@@ -301,12 +301,12 @@
         // 
         function onLoad() {
             document.addEventListener("deviceready", onDeviceReady , false);
-            //document.addEventListener("deviceready", checkConnection, false);
         }
         // device APIs are available
         //
         var pushNotification;
         function onDeviceReady() {
+                alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
