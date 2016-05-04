@@ -119,39 +119,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-        </script>
-        <script type="text/javascript" charset="utf-8">
-        $(document).ready(function(){
-            $('#forgot-password-link').click(function(){
-			$('#register-link,#login-access-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').hide();
-                $('#login-access-form').hide();
-                $('#forgot-password-form').show();
-				$('#forgot-password-link').addClass( "active-top-slide-linking" );
-            });
-            $('#register-link').click(function(){
-			$('#forgot-password-link,#login-access-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').show();
-                $('#login-access-form').hide();
-                $('#forgot-password-form').hide();
-				$('#register-link').addClass( "active-top-slide-linking" );
-            });
-            $('#login-access-link').click(function(){
-			$('#forgot-password-link,#register-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').hide();
-                $('#login-access-form').show();
-                $('#forgot-password-form').hide();
-				$('#login-access-link').addClass( "active-top-slide-linking" );
-            });
-        });
-        // Call onDeviceReady when Cordova is loaded.
-        //
-        // At this point, the document has loaded but cordova-1.7.0.js has not.
-        // When Cordova is loaded and talking with the native device,
-        // it will call the event `deviceready`.
-        // 
             document.addEventListener("deviceready", onDeviceReady , false);
-            var db = window.openDatabase("Dummy_DB", "1.0", "Just a Dummy DB", 200000); //will create database Dummy_DB or open it
         // device APIs are available
         //
         var pushNotification;
@@ -391,7 +359,32 @@
                 $('.container').hide();
                 $('.container-offline').show();
            }
-        }
+        }            
+        </script>
+        <script type="text/javascript" charset="utf-8">
+        $(document).ready(function(){
+            $('#forgot-password-link').click(function(){
+			$('#register-link,#login-access-link').removeClass( "active-top-slide-linking" );
+                $('#register-form').hide();
+                $('#login-access-form').hide();
+                $('#forgot-password-form').show();
+				$('#forgot-password-link').addClass( "active-top-slide-linking" );
+            });
+            $('#register-link').click(function(){
+			$('#forgot-password-link,#login-access-link').removeClass( "active-top-slide-linking" );
+                $('#register-form').show();
+                $('#login-access-form').hide();
+                $('#forgot-password-form').hide();
+				$('#register-link').addClass( "active-top-slide-linking" );
+            });
+            $('#login-access-link').click(function(){
+			$('#forgot-password-link,#register-link').removeClass( "active-top-slide-linking" );
+                $('#register-form').hide();
+                $('#login-access-form').show();
+                $('#forgot-password-form').hide();
+				$('#login-access-link').addClass( "active-top-slide-linking" );
+            });
+        });
         </script>
         <script>
         function jsoncallback(data)
