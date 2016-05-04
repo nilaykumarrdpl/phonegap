@@ -30,160 +30,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Kazo.com</title>
-        <style>
-            .container {
-                width: 100%;
-                height: 0;
-            }
-            .video {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-            .loader-iframe {display:none;}
-            @media all and (min-width:200px) and (max-width:320px) {            
-                .device-200-320{display:block;width: 100%;}
-                .device-320-480{display:none;}
-                .device-480-800{display:none}
-                .device-720-1280{display:none}
-            }
-            @media all and (min-width:320px) and (max-width:480px) {            
-                .device-200-320{display:none;}
-                .device-320-480{display:block;width: 100%;}
-                .device-480-800{display:none}
-                .device-720-1280{display:none}
-            }
-            @media all and (min-width:480px) and (max-width:800px) {            
-                .device-200-320{display:none;}
-                .device-320-480{display:none;}
-                .device-480-800{display:block;width: 100%;}
-                .device-720-1280{display:none}
-            }
-            @media all and (min-width:720px) and (max-width:1280px) {            
-                .device-200-320{display:none;}
-                .device-320-480{display:none;}
-                .device-480-800{display:none}
-                .device-720-1280{display:block;width: 100%;}
-            }
-        </style>
-        <style>
-            @font-face {
-              font-family: 'FontAwesome';
-              src: url('fonts/fontawesome-webfont.eot?v=4.5.0');
-              src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
-              font-weight: normal;
-              font-style: normal;
-            }
-            .fa-navicon::before, .fa-reorder::before, .fa-bars::before {    content: "\f0c9";	font-size: 25px;	margin-left: 3px;	color:#999999;}
-
-
-            .fa {
-              display: inline-block;
-              font: normal normal normal 14px/1 FontAwesome;
-              font-size: inherit;
-              text-rendering: auto;
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale;
-            }
-
-            .fa-cart-plus:before {
-              content: "\f217";
-             font-size: 28px;
-              margin:-6px 0 0 3px !important;
-              color:#999999;
-            }
-            .fa-navicon::before, .fa-reorder::before, .fa-bars::before {
-                content: "\f0c9";
-                font-size: 25px;
-                margin-left: 3px;
-                color:#999999;
-            }
-
-            .fa-user:before {
-              content: "\f007";
-              font-size: 24px;
-              margin-left: 6px;
-              color:#999999;
-            }
-            .fa-facebook-square:before {
-              content: "\f082";
-              font-size: 28px;
-              margin-left: 6px;
-              color:#797979;
-            }
-            .fa-ellipsis-v:before {
-              content: "\f142";
-            }
-
-
-            @media all and (min-width:200px) and (max-width:640px) {
-
-            .header-main-inner-sects {
-                height: 30px;
-                margin: 0 auto;
-                padding: 8px 0;
-                width: 94%;
-            }
-            body .header-language-background{background:#000; position:relative; z-index:99999; height:47px;}
-            body{margin:0;padding:0;}
-            .header-main-part {    background: #000 none repeat scroll 0 0;    height: auto;}
-            .device-logo {    display: none;}
-            body .header-language-background{padding:0!important;}
-            .header-language-background .header-main-part #header-search {    padding: 15px 0 !important;    width: 100% !important;display:none;}
-            .left-icon-area-sec {float: right;    width: 50%;}
-            .header-main-part .slide-header {    display: block;    float: left;    width: 50%;}
-            .app-logo {    float: left; margin: 0 11%;margin-top:3px;}
-            .skip-links {    float: left;}
-            .fa-navicon::before, .fa-reorder::before, .fa-bars::before{color:#fff;}
-            .app-logo > img {    width: auto;height:18px;}
-            .srch-head-app .fa.fa-search {    color: #fff;    font-size: 22px;}
-            .fa-search::before { content: "\f002";}
-            .internal-menu-bars {    display: none;}
-            .cms-index-index .skip-link{background:none !important;}
-            .left-icon-area-sec .header-minicart {    float: left;margin: -3px 22%;}
-            .left-icon-area-sec .header-miniacnt {    float: left;}
-            .left-icon-area-sec .fa-cart-plus::before{color:#fff;}
-            .left-icon-area-sec .fa-user::before{color:#fff;}
-            .left-icon-area-sec .eliipsiis { color:#fff;   float: right;}
-            .eliipsiis .fa.fa-ellipsis-v {    color: #fff;    font-size: 23px;}
-            .eliipsiis .internal-menu-bars {    border: medium none;height: auto;max-height: 80%;overflow-y: scroll;position: fixed;right: 0;top: 47px;width: 50%;background:#fff}
-            .header-main-part .slide-header #header-nav {    width: 205px !important; left: 0% !important;position:fixed;top: 47px !important;background:#fff;}
-            .header-language-background #header-search {   background: #000000;    width: 100% !important; padding: 16px 0 !important;position: absolute;top:39px}
-            form#search_mini_form {    background: #fff;    border-radius: 5px;    margin: 0 auto;    overflow: hidden;    width: 80%;}
-            #search {background: #fff ;color: #000;  height: 30px;border:none;padding: 0 0 0 5%;    width: 76%;}
-            #search_mini_form .button.search-button {    background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;    display: block;height: 30px;padding: 0 !important;width:27px;}
-            form#search_mini_form .fa.fa-search {    color: #797979;    font-size: 20px;}
-             .main-container{padding-top: 39px !important;}
-            .internal-menu-bars li {    border-bottom: 1px solid #dadada;    padding: 15px 2px 10px 10px;}
-            form#search_mini_form #advice-required-entry-search {    display: none;}
-            .left-icon-area-sec .header-miniacnt #header-account{display:none;top:39px !important;}
-            .left-icon-area-sec .header-miniacnt #header-cart{top:39px !important;}
-            .eliipsiis {    display: block;}
-            .app-logo {    display: block;}
-            .srch-head-app {    display: block;}
-            button .fa.fa-search {    display: block;}
-            .skip-links {    float: left;    width: 28px;display:block !important;}
-            .left-icon-area-sec #header-cart{top:42px !important; z-index: 2147483647;}
-            .video-container {float: left;    height: auto!important;   overflow: hidden;    padding-bottom: 0;    padding-top: 0;    position: static!important;    width: 100%;}
-            .video-container iframe, .video-container object, .video-container embed{position:static !important;}
-            .collectionContainer{margin-top:5px !important;}
-             p {    margin: 0!important;}
-             .collection li{    margin: 0!important;}
-            .collectionContainer ul li img {    display: block;    margin: 10px 0 !important;}
-             .collection li a{    margin: 0!important;}
-            #load_light{ background: #fff ;float: left;height: 100%;left: 0 !important;overflow: hidden;text-align: center;width: 100%; z-index: 9999;}
-            #load_light .loading_image img{margin:0 auto!important;padding-left: 5%;}
-            .left-icon-area-sec .header-minicart a.skip-cart.no-count {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;}
-            .button.search-button .fa.fa-search {    margin-top: 3px;}
-            #load_light .loading_image {    position: absolute;    top: 25% !important; width:100%;}
-            .loading_image span {color: #000!important;display: block;    text-align: center !important;    width: 100%;font-family: Verdana,Arial,sans-serif;font-size: 12px;line-height: 1.5; margin-top:-3px;}
-            body .login_access{width:280px !important;  }
-            .loader-div{z-index:99;}
-            .loader-iframe{z-index:9999;}
-            }}
-        </style>        
         <link rel="apple-touch-icon" href="icon.png">
     </head>
     <body  onload="onLoad()">
@@ -228,27 +74,30 @@
                   </div>
                 </div>
                 <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
+                    <div class="top-slide-with-linking">
+                        <a id="login-access-link" class="active-top-slide-linking" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>
+                        <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>
+                        <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
+                    
+                    </div> 
                     <div class="loading_image">
                     <div class="progress-bar-validation">
                     <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
                     <span> Loading... Please wait </span>
                     </div>
-                    <button onClick="connectSocialLogin()">Facebook Login</button> <br /><br /> OR <br /><br />
+                    <button class="fb-login-in-app" onClick="connectSocialLogin()">Facebook Login</button> <br /><br /> OR
                     <form id="login-access-form" method="post" name="login-access-form">
-                      <span>Members Login Here</span>
                       <input type="hidden" name="form_type" value="signin" />
                       <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
                       <input type="password" placeholder="Password" name="password" id="password" required><br /><br />
-                      <button id="submit" name="submit" title="sigin" class="button" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
+                      <button id="submit" name="submit" title="sigin"  class="button procedd-account" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
                     </form>
                     <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
-                      <span>Forgot Your Password?</span>
                       <input type="hidden" name="form_type" value="forgot-password" />
                       <input type="email" name="email" id="email_f" value="" placeholder="Email Address" required><br />
-                      <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
+                      <button id="submit" name="submit" title="forgot-password" class="button fgt-psw" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
                     </form>
                     <form id="register-form" method="post" name="register-form" style="display:none;">
-                      <span>Register Here</span>
                       <input type="hidden" name="form_type" value="register" />
                       <input type="text" name="firstname" id="firstname_r" value="" placeholder="First Name" required><br />
                       <input type="text" name="lastname" id="lastname_r" value="" placeholder="Last Name" required><br />
@@ -256,12 +105,8 @@
                       <input type="email" name="email" id="email_r" value="" placeholder="Email Address" required><br />
                       <input type="password" name="password" placeholder="Password" id="password_r" required=""><br />
                       <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password_r" required=""><br />
-                      <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
+                      <button id="submit" name="submit" title="forgot-password" class="button proceed-to-rgstr" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
                     </form>
-                    <br />
-                      <a id="login-access-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>&nbsp;
-                      <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>&nbsp;
-                      <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
                     </div>
                 </div>
             </div>
@@ -278,19 +123,25 @@
         <script type="text/javascript" charset="utf-8">
         $(document).ready(function(){
             $('#forgot-password-link').click(function(){
+			$('#register-link,#login-access-link').removeClass( "active-top-slide-linking" );
                 $('#register-form').hide();
                 $('#login-access-form').hide();
                 $('#forgot-password-form').show();
+				$('#forgot-password-link').addClass( "active-top-slide-linking" );
             });
             $('#register-link').click(function(){
+			$('#forgot-password-link,#login-access-link').removeClass( "active-top-slide-linking" );
                 $('#register-form').show();
                 $('#login-access-form').hide();
                 $('#forgot-password-form').hide();
+				$('#register-link').addClass( "active-top-slide-linking" );
             });
             $('#login-access-link').click(function(){
+			$('#forgot-password-link,#register-link').removeClass( "active-top-slide-linking" );
                 $('#register-form').hide();
                 $('#login-access-form').show();
                 $('#forgot-password-form').hide();
+				$('#login-access-link').addClass( "active-top-slide-linking" );
             });
         });
         // Call onDeviceReady when Cordova is loaded.
@@ -301,6 +152,7 @@
         // 
         function onLoad() {
             document.addEventListener("deviceready", onDeviceReady , false);
+            var db = window.openDatabase("Dummy_DB", "1.0", "Just a Dummy DB", 200000); //will create database Dummy_DB or open it
         }
         // device APIs are available
         //
@@ -415,7 +267,6 @@
         }
         
         function connectByEmail() {
-                $('.progress-bar-validation').show();
                 var email = $('#email').val();
                 var password = $('#password').val();
                 if(email == ''){alert('Please enter your email');$('#email').focus();return;}
@@ -424,6 +275,7 @@
                 var form = $(formId); 
                 var params = form.serialize();
                 //alert(params);
+                $('.progress-bar-validation').show();                
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/connectedByEmail.php',
@@ -436,13 +288,13 @@
                 });                 
         }
         function sendPasswordByEmail() {
-                $('.progress-bar-validation').show();
                 var email = $('#email_f');
                 if (!validateEmail(email.val())) { alert('Invalid Email Address');email.focus();return;}
                 var formId = '#forgot-password-form';
                 var form = $(formId); 
                 var params = form.serialize();
                 //alert(params);
+                $('.progress-bar-validation').show();
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/connectedByEmail.php',
@@ -472,6 +324,7 @@
                 var form = $(formId); 
                 var params = form.serialize();
                 alert(params);
+                $('.progress-bar-validation').show();
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/connectedByEmail.php',

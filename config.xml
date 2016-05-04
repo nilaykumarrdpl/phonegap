@@ -18,6 +18,10 @@
   <gap:plugin name="org.apache.cordova.media"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="phonegap-plugin-push" source="npm" version="1.2.3" />
+  <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
+        <param name="APP_ID" value="1696441733940919" />
+        <param name="APP_NAME" value="kazo" />
+  </gap:plugin>  
   <icon src="icon.png" gap:role="default" />
   <icon src="res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
