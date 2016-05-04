@@ -33,90 +33,9 @@
         <link rel="apple-touch-icon" href="icon.png">
     </head>
     <body>
-    <div class="app">
-        <div class="container" id="container">
-            <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
-            <div class="video loader-div">
-                <div class="header-language-background">
-                  <div class="header-language-container">
-                    <div class="header-main-part">
-                      <div class="header-main-inner-sects">
-                        <!-- Cart -->
-                        <div class="left-icon-area-sec">
-                          <div class="header-minicart"> <a class="skip-link skip-cart  no-count" href="#header-cart"> <i class="fa fa-cart-plus"></i>  </a>
-                            <div class="block block-cart skip-content" id="header-cart">
-                              <div class="minicart-message" id="minicart-error-message"></div>
-                              <div class="minicart-message" id="minicart-success-message"></div>
-                            </div>
-                          </div>
-                          <div class="header-miniacnt">
-                            <div class="mobile-hidden-part" style="display: none;"> <a class="skip-link skip-account" href="#header-account"> <i class="fa fa-user"></i> <span class="label">Account</span> </a> </div>
-                            <div> <a class="signin mobile-navigation" href="javascript:void(0)"> <i class="fa fa-user"></i> </a> </div>
-                            <!-- Account -->
-                            <div class="skip-content" id="header-account">
-                              
-                            </div>
-                          </div>
-                          <div class="eliipsiis"> <a class="top-app-navig" href="javascript:void(0);"> <i class="fa fa-ellipsis-v"></i></a> </div>
-                        </div>
-                        <div class="slide-header">
-                          <!-- Navigation -->
-                          <div class="store-language-container"></div>
-                          <!-- Skip Links -->
-                          <div class="skip-links"> <a class="common-toggle" href="#header-nav"> <i class="fa fa-navicon"></i>  </a> </div>
-                          <!-- Search -->
-                          <a class="logo-loader" href="http://54.169.245.192/kazo/">
-                          <div class="app-logo"> <img src="fonts/k.jpg"> </div>
-                          </a>
-                          <div class="srch-head-app"><a href="javascript:void(0);"><i class="fa fa-search"></i></a></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
-                    <div class="top-slide-with-linking">
-                        <a id="login-access-link" class="active-top-slide-linking" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>
-                        <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>
-                        <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
-                    
-                    </div> 
-                    <div class="loading_image">
-                    <div class="progress-bar-validation">
-                    <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
-                    <span> Loading... Please wait </span>
-                    </div>
-                    <button class="fb-login-in-app" onClick="connectSocialLogin()">Facebook Login</button> <br /><br /> OR
-                    <form id="login-access-form" method="post" name="login-access-form">
-                      <input type="hidden" name="form_type" value="signin" />
-                      <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
-                      <input type="password" placeholder="Password" name="password" id="password" required><br /><br />
-                      <button id="submit" name="submit" title="sigin"  class="button procedd-account" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
-                    </form>
-                    <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
-                      <input type="hidden" name="form_type" value="forgot-password" />
-                      <input type="email" name="email" id="email_f" value="" placeholder="Email Address" required><br />
-                      <button id="submit" name="submit" title="forgot-password" class="button fgt-psw" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
-                    </form>
-                    <form id="register-form" method="post" name="register-form" style="display:none;">
-                      <input type="hidden" name="form_type" value="register" />
-                      <input type="text" name="firstname" id="firstname_r" value="" placeholder="First Name" required><br />
-                      <input type="text" name="lastname" id="lastname_r" value="" placeholder="Last Name" required><br />
-                      <input type="tel" name="mobile" id="mobile_r" value="" placeholder="Mobile Number" required maxlength="10"><br />
-                      <input type="email" name="email" id="email_r" value="" placeholder="Email Address" required><br />
-                      <input type="password" name="password" placeholder="Password" id="password_r" required=""><br />
-                      <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password_r" required=""><br />
-                      <button id="submit" name="submit" title="forgot-password" class="button proceed-to-rgstr" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
-                    </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="container-offline" style="display:none">
+        <div class="container-offline">
             No network connection ...
-        </div> 
-    </div>
+        </div>        
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
