@@ -149,9 +149,6 @@
             $("#gcm_id").html(data.registrationId);
             var deviceId = data.registrationId;
                 db.transaction(function(transaction) {
-                transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
-                var len = results.rows.length;
-                if(len >){alert('exist');}else{
                 var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
                 transaction.executeSql(executeQuery, [deviceId]
                 , function(tx, result) {
@@ -159,7 +156,7 @@
                 },
                 function(error){
                 alert('Error occurred');
-                });}
+                });
                 });
             
             $.ajax({
