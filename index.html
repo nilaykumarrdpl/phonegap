@@ -21,7 +21,7 @@
 -->
 <html>
     <head>
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="js/jquery-1.12.0.min.js"></script>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
@@ -32,7 +32,7 @@
         <title>Kazo.com</title>
         <link rel="apple-touch-icon" href="icon.png">
     </head>
-    <body  onload="onLoad()">
+    <body>
         <div class="container" id="container">
             <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
             <div class="video loader-div">
@@ -150,10 +150,8 @@
         // When Cordova is loaded and talking with the native device,
         // it will call the event `deviceready`.
         // 
-        function onLoad() {
             document.addEventListener("deviceready", onDeviceReady , false);
             var db = window.openDatabase("Dummy_DB", "1.0", "Just a Dummy DB", 200000); //will create database Dummy_DB or open it
-        }
         // device APIs are available
         //
         var pushNotification;
