@@ -245,7 +245,6 @@
                       <span>Forgot Your Password?</span>
                       <input type="hidden" name="form_type" value="forgot-password" />
                       <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
-                      <span class="signin-error"></span>
                       <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
                     </form>
                     <form id="register-form" method="post" name="register-form" style="display:none;">
@@ -255,8 +254,8 @@
                       <input type="text" name="lastname" id="lastname" value="" placeholder="Last Name" required><br />
                       <input type="text" name="mobile" id="mobile" value="" placeholder="Mobile Number" required><br />
                       <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
-                      <input type="password" placeholder="Password" id="password" required=""><br />
-                      <input type="password" placeholder="Confirm Password" id="confirm_password" required=""><br />
+                      <input type="password" name="password" placeholder="Password" id="password" required=""><br />
+                      <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required=""><br />
                       <button id="submit" name="submit" title="forgot-password" class="button" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
                     </form>
                     <br />
@@ -444,11 +443,12 @@
                 });                 
         }
         function sendPasswordByEmail() {
-                alert('forgot-password-form');
+                //alert('forgot-password-form');
+                $('.progress-bar-validation').show();
                 var formId = '#forgot-password-form';
                 var form = $(formId); 
                 var params = form.serialize();
-                alert(params);
+                //alert(params);
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/script/gcm/connectedByEmail.php',
@@ -480,11 +480,15 @@
         
         function jsoncallbackConnectedByEmail(data) {
             //alert('Recieved');
-            //alert(JSON.stringify(data));
+            var result1 = JSON.stringify(data);
             $('.progress-bar-validation').hide();
             if(!data.error) {
                 //alert(data.htmlData.email);
-                loadIframe(data.htmlData.email);
+                if(data.form_type == 'forgot-password'){
+                    alert(JSON.stringify(data.htmlData));
+                }else{
+                    loadIframe(data.htmlData.email);
+                }
             } else {
                 alert(data.htmlData);
             }
