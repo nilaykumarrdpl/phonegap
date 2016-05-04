@@ -128,16 +128,37 @@
         <script type="text/javascript">
             app.initialize();
             document.addEventListener("deviceready", onDeviceReady , false);
+            var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000); //will create database KAZO_DB or open it
         var pushNotification;
         function onDeviceReady() {
                 alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
+                db.transaction(function(transaction) {
+                    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, device_id text)', [],
+                    function(tx, result) {
+                    alert("Table created successfully");
+                    },
+                    function(error) {
+                    alert("Error occurred while creating the table.");
+                    });
+                });
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
          push.on('registration', function(data) {
             console.log(data.registrationId);
             $("#gcm_id").html(data.registrationId);
             var deviceId = data.registrationId;
+                db.transaction(function(transaction) {
+                var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
+                transaction.executeSql(executeQuery, [deviceId]
+                , function(tx, result) {
+                alert('Inserted');
+                },
+                function(error){
+                alert('Error occurred');
+                });
+                });
+            
             $.ajax({
               type: 'GET',
               url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
