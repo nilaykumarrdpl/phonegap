@@ -135,7 +135,7 @@
                 $('.progress-bar-validation').hide();
                 db.transaction(function(transaction) {
                     transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, device_id text)', [],
-                    function(tx, result) {
+                    function(transaction, result) {
                     alert("Table created successfully");
                     },
                     function(error) {
