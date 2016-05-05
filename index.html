@@ -182,7 +182,7 @@
                 var executeQuery = "SELECT * phonegap_pro WHERE device_id = '"+deviceId+"'";
                 alert(executeQuery);
                 transaction.executeSql(executeQuery, [deviceId]
-                , function(tx, result) {
+                , function(transaction, result) {
                 alert(JSON.stringify(result));
                 var sData = jquery.ParseJSON(result);
                 var nLength = result.rows.length;
