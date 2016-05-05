@@ -177,7 +177,7 @@
         }
         function userExistInDB(deviceId){
             db.transaction(function(transaction) {
-                var executeQuery = "SELECT * phonegap_pro WHERE device_id = '?'";
+                var executeQuery = "SELECT * phonegap_pro WHERE device_id = '"+deviceId+"'";
                 transaction.executeSql(executeQuery, [deviceId]
                 , function(tx, result) {
                 alert(JSON.stringify(result));
@@ -187,7 +187,7 @@
                 if(nLength == 0 ) {insertUserInDB(deviceId);}
                 },
                 function(error){
-                alert('Error occurred');
+                alert('Error occurred: SELECT Query.');
                 });
                 });
         }
