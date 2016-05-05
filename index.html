@@ -176,10 +176,10 @@
                 //alert('Device is ready')
         }
         function userExistInDB(deviceId){
-            var executeQuery = "SELECT * phonegap_pro WHERE device_id = '"+deviceId+"'";
+            var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
                 alert(executeQuery);
             db.transaction(function(transaction) {
-                var executeQuery = "SELECT * phonegap_pro WHERE device_id = '"+deviceId+"'";
+                var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
                 alert(executeQuery);
                 transaction.executeSql(executeQuery, [deviceId]
                 , function(transaction, result) {
