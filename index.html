@@ -181,7 +181,7 @@
             db.transaction(function(transaction) {
                 var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
                 alert(executeQuery);
-                transaction.executeSql(executeQuery, [deviceId]
+                transaction.executeSql(executeQuery, []
                 , function(transaction, result) {
                 alert(JSON.stringify(result));
                 var sData = jquery.ParseJSON(result);
