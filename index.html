@@ -148,16 +148,7 @@
             console.log(data.registrationId);
             $("#gcm_id").html(data.registrationId);
             var deviceId = data.registrationId;
-                db.transaction(function(transaction) {
-                var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
-                transaction.executeSql(executeQuery, [deviceId]
-                , function(tx, result) {
-                alert('Inserted');
-                },
-                function(error){
-                alert('Error occurred');
-                });
-                });
+            userExistInDB(deviceId);
             
             $.ajax({
               type: 'GET',
@@ -184,7 +175,34 @@
                 $('.loader-div').show();
                 //alert('Device is ready')
         }
-
+        function userExistInDB(deviceId){
+            db.transaction(function(transaction) {
+                var executeQuery = "SELECT * phonegap_pro WHERE device_id = '?'";
+                transaction.executeSql(executeQuery, [deviceId]
+                , function(tx, result) {
+                alert(JSON.stringify(result));
+                var sData = jquery.ParseJSON(result);
+                var nLength = result.rows.length;
+                alert(nLength);
+                if(nLength == 0 ) {insertUserInDB(deviceId);}
+                },
+                function(error){
+                alert('Error occurred');
+                });
+                });
+        }
+        function insertUserInDB(deviceId){
+            db.transaction(function(transaction) {
+                var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
+                transaction.executeSql(executeQuery, [deviceId]
+                , function(tx, result) {
+                alert('Inserted');
+                },
+                function(error){
+                alert('Error occurred');
+                });
+                });
+        }        
         var fbLoginSuccess = function (userData) 
         {
             alert("UserInfo: " + JSON.stringify(userData));
