@@ -140,7 +140,7 @@
                     console.log(data.registrationId);
                     $("#gcm_id").html(data.registrationId);
                     var deviceId = data.registrationId;
-
+                    getDeviceId(deviceId);
                     $.ajax({
                         type: 'GET',
                         url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
@@ -159,7 +159,42 @@
             $('.device-ready').hide();
             $('.loader-div').show();
         }
-        
+ function getDeviceId(deviceId) {
+                 db.transaction(function(tx) {
+
+                        //create table
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS demo (id integer primary key, data text, data_num integer)", [], function(tx, res){
+
+                                //retrieve data
+                                tx.executeSql("SELECT * FROM demo WHERE id = ?", [deviceId], function(tx, res){
+
+            //insert data
+            tx.executeSql("INSERT INTO demo (id, data, data_num) VALUES (?,?,?)", [2, deviceId, 100], function(tx,res){
+
+                //retrieve data
+                tx.executeSql("SELECT * FROM demo WHERE id = ?", [1], function(tx, res){
+                    for(var iii = 0; iii < res.rows.length; iii++)
+                    {
+                        alert(res.rows.item(iii).id);
+                        alert(res.rows.item(iii).data);
+                        alert(res.rows.item(iii).data_num);
+                    }
+                })
+
+            });
+
+        })
+
+                        });
+
+                    }, function(err){
+
+                        //errors for all transactions are reported here
+                        alert("Error: " + err.message)
+
+                    });
+
+ } 
         
 //create table and insert some record
     function populateDB(tx) {
@@ -183,7 +218,7 @@
     }
  
     function querySuccess(tx,result){
-        alert(result.rows.length)
+        alert(result.rows.length);
         if(result.rows.length <= 0){alert();
             db.transaction(insertQueryDB,errorCB);
         } 
