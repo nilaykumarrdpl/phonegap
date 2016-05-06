@@ -140,6 +140,8 @@
             var pushNotification;
             function onDeviceReady() {
                 db.transaction(populateDB, errorCB, successCB);
+                getDeviceId(456);
+                window.localStorage.setItem("deviceId", '456');
                 alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
@@ -148,7 +150,7 @@
                     console.log(data.registrationId);
                     $("#gcm_id").html(data.registrationId);
                     var deviceId = data.registrationId;
-                    getDeviceId(deviceId);
+                    window.localStorage.setItem("deviceId", deviceId);
                     $.ajax({
                         type: 'GET',
                         url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
@@ -218,6 +220,7 @@
  
     //select all from SoccerPlayer
     function queryDB(tx){
+        alert(window.localStorage.getItem("deviceId"));
         tx.executeSql('SELECT * FROM SoccerPlayer',[],querySuccess,errorCB);
     }
  
