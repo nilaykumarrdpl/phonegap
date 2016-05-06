@@ -128,18 +128,25 @@
         <script type="text/javascript">
             app.initialize();
             document.addEventListener("deviceready", onDeviceReady , false);
-            var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000); //will create database KAZO_DB or open it
+            var db = window.sqlitePlugin.openDatabase({name: "my.db"});
         var pushNotification;
         function onDeviceReady() {
                 alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
-                db.transaction(function(transaction) {
-                    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, device_id text)', [],
-                    function(transaction, result) {
-                    alert("Table created successfully");
-                    },
-                    function(error) {
-                    alert("Error occurred while creating the table.");
+                db.transaction(function(tx) {
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, device_id text)');
+                    
+                    tx.executeSql("INSERT INTO phonegap_pro (device_id) VALUES (?)", ["test"], function(tx, res) {
+                      alert("insertId: " + res.insertId + " -- probably 1");
+                      alert("rowsAffected: " + res.rowsAffected + " -- should be 1");
+
+                      tx.executeSql("select count(id) as cnt from phonegap_pro;", [], function(tx, res) {
+                        alert("res.rows.length: " + res.rows.length + " -- should be 1");
+                        alert("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
+                      });
+
+                    }, function(e) {
+                      alert("ERROR: " + e.message);
                     });
                 });
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
@@ -175,37 +182,6 @@
                 $('.loader-div').show();
                 //alert('Device is ready')
         }
-        function userExistInDB(deviceId){
-            var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
-                alert(executeQuery);
-            db.transaction(function(transaction) {
-                var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
-                alert(executeQuery);
-                transaction.executeSql(executeQuery, []
-                , function(transaction, result) {
-                alert(JSON.stringify(result));
-                var sData = jquery.ParseJSON(result);
-                var nLength = result.rows.length;
-                alert(nLength);
-                if(nLength == 0 ) {insertUserInDB(deviceId);}
-                },
-                function(error){
-                alert('Error occurred: SELECT Query.');
-                });
-                });
-        }
-        function insertUserInDB(deviceId){
-            db.transaction(function(transaction) {
-                var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
-                transaction.executeSql(executeQuery, [deviceId]
-                , function(tx, result) {
-                alert('Inserted');
-                },
-                function(error){
-                alert('Error occurred');
-                });
-                });
-        }        
         var fbLoginSuccess = function (userData) 
         {
             alert("UserInfo: " + JSON.stringify(userData));
