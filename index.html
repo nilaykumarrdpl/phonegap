@@ -128,84 +128,35 @@
         <script type="text/javascript">
             app.initialize();
             document.addEventListener("deviceready", onDeviceReady , false);
-            var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000); //will create database KAZO_DB or open it
-        var pushNotification;
-        function onDeviceReady() {
+            var pushNotification;
+            function onDeviceReady() {
                 alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
-                db.transaction(function(transaction) {
-                    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, device_id text)', [],
-                    function(transaction, result) {
-                    alert("Table created successfully");
-                    },
-                    function(error) {
-                    alert("Error occurred while creating the table.");
-                    });
-                });
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
-         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-         push.on('registration', function(data) {
-            console.log(data.registrationId);
-            $("#gcm_id").html(data.registrationId);
-            var deviceId = data.registrationId;
-            userExistInDB(deviceId);
-            
-            $.ajax({
-              type: 'GET',
-              url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
-              dataType: 'jsonp',
-              async: false,
-              jsonpCallback: 'jsoncallback',
-              crossDomain: true,
-              data: {deviceId:deviceId},
-              cache: false,
-            }); 
-        });
-        push.on('notification', function(data) {
-            console.log(data.message);
-            alert(data.title+" Message: " +data.message+" image: " +data.image);
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
-        });
-                //checkConnection();
-                $('.device-ready').hide();
-                $('.loader-div').show();
-                //alert('Device is ready')
+                            "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+                push.on('registration', function(data) {
+                    console.log(data.registrationId);
+                    $("#gcm_id").html(data.registrationId);
+                    var deviceId = data.registrationId;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
+                        dataType: 'jsonp',
+                        async: false,
+                        jsonpCallback: 'jsoncallback',
+                        crossDomain: true,
+                        data: {deviceId:deviceId},
+                        cache: false,
+                    }); 
+            });
+            push.on('notification', function(data) {
+                console.log(data.message);
+                alert(data.title+" Message: " +data.message+" image: " +data.image);
+            });
+            $('.device-ready').hide();
+            $('.loader-div').show();
         }
-        function userExistInDB(deviceId){
-            var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
-                alert(executeQuery);
-            db.transaction(function(transaction) {
-                var executeQuery = "SELECT * FROM phonegap_pro WHERE device_id = '"+deviceId+"'";
-                alert(executeQuery);
-                transaction.executeSql(executeQuery, []
-                , function(transaction, result) {
-                alert(JSON.stringify(result));
-                var sData = jquery.ParseJSON(result);
-                var nLength = result.rows.length;
-                alert(nLength);
-                if(nLength == 0 ) {insertUserInDB(deviceId);}
-                },
-                function(error){
-                alert('Error occurred: SELECT Query.');
-                });
-                });
-        }
-        function insertUserInDB(deviceId){
-            db.transaction(function(transaction) {
-                var executeQuery = "INSERT INTO phonegap_pro (device_id) VALUES (?)";
-                transaction.executeSql(executeQuery, [deviceId]
-                , function(tx, result) {
-                alert('Inserted');
-                },
-                function(error){
-                alert('Error occurred');
-                });
-                });
-        }        
         var fbLoginSuccess = function (userData) 
         {
             alert("UserInfo: " + JSON.stringify(userData));
@@ -255,21 +206,9 @@
             else {
               alert("Successfully data recived");
               //onload, call loadIframe() function
-                /*var id = 'container';
-                var parentElement = document.getElementById(id);
-                var listeningElement = parentElement.querySelector('.loader-div');
-                var receivedElement = parentElement.querySelector('.loader-iframe');
-
-                listeningElement.setAttribute('style', 'display:none;');
-                receivedElement.setAttribute('style', 'display:block;');*/
                 alert(data.user_detail.email);
-                //loadIframe('nilay.lucky4u@gmail.com'); 
                 loadIframe(data.user_detail.email); 
-              //alert(data);
-              //var obj = $.parseJSON( data );
-              //alert( data.message );
             }        
-          //alert( 'hello'+data.message );
         }
         function connectSocialLogin() {
                 alert('ahhaa');
@@ -442,11 +381,7 @@
             }
             else {
               alert("Successfully data recived");
-              //alert(data);
-              //var obj = $.parseJSON( data );
-              //alert( data.message );
             }        
-          //alert( 'hello'+data.message );
         }
         </script>
     </body>
