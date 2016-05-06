@@ -75,21 +75,33 @@ body {
 }
 
 .loading_image button.fb-login-in-app {
-    background: #4867aa none repeat scroll 0 0;
+    background-image: -webkit-linear-gradient(top, #4867aa, #7b96cf );
+	background-image: -moz-linear-gradient(top, #4867aa, #7b96cf );
+	background-image: -o-linear-gradient(top, #4867aa, #7b96cf );
+	background-image: linear-gradient(top, #4867aa, #7b96cf );
     border: medium none;
     color: #fff;
     line-height: 35px;
     width: 96%;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 3px;
 }
 
 
 .button.procedd-account {
-    background: #535353 none repeat scroll 0 0;
-    border: medium none;
+    background-image: -webkit-linear-gradient(top, #535353, #8C8989);
+	background-image: -moz-linear-gradient(top, #535353, #8C8989);
+	background-image: -o-linear-gradient(top, #535353, #8C8989);
+	background-image: linear-gradient(top, #535353, #8C8989);    
+	border: medium none;
     display: block;
     height: 35px;
     margin: 0 auto;
     width: 96%;
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 3px;
 }
 
 .button.procedd-account span {
@@ -129,18 +141,26 @@ form#login-access-form input {
     margin: 0 auto;
     width: 94%;}
 	
-	.button.fgt-psw{background: #535353 none repeat scroll 0 0;
+	.button.fgt-psw{background-image: -webkit-linear-gradient(top, #535353, #8C8989);
+	background-image: -moz-linear-gradient(top, #535353, #8C8989);
+	background-image: -o-linear-gradient(top, #535353, #8C8989);
+	background-image: linear-gradient(top, #535353, #8C8989); 
     border: medium none;
     display: block;
     height: 35px;
     margin: 0 auto;
-    width: 96%;}
+    width: 96%;
+	border-radius: 3px;}
 	.button.fgt-psw span {
     color: #fff !important;
+	
 }
 
 	
-	.button.proceed-to-rgstr{background: #535353;    border: medium none;    display: block;    height: 35px;    margin: 0 auto;    width: 96%;}
+	.button.proceed-to-rgstr{background-image: -webkit-linear-gradient(top, #535353, #8C8989);
+	background-image: -moz-linear-gradient(top, #535353, #8C8989);
+	background-image: -o-linear-gradient(top, #535353, #8C8989);
+	background-image: linear-gradient(top, #535353, #8C8989); border: medium none;    display: block;    height: 35px;    margin: 0 auto;    width: 96%;font-size: 14px;font-weight: 600;border-radius: 3px;}
 
 
             .container {
@@ -288,9 +308,10 @@ form#login-access-form input {
             #load_light .loading_image img{margin:0 auto!important;padding-left: 5%;}
             .left-icon-area-sec .header-minicart a.skip-cart.no-count {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;}
             .button.search-button .fa.fa-search {    margin-top: 3px;}
-            #load_light .loading_image {    position: absolute;    top: 25% !important; width:100%;}
+            #load_light .loading_image {    position: absolute;    top: 22% !important; width:100%;padding: 0 8px;box-sizing: border-box;}
             .loading_image span {color: #000!important;display: block;    text-align: center !important;    width: 100%;font-family: Verdana,Arial,sans-serif;font-size: 12px;line-height: 1.5; margin-top:-3px;}
             body .login_access{width:280px !important;  }
             .loader-div{z-index:99;}
             .loader-iframe{z-index:9999;}
-            }}
+            }
+			.progress-bar-validation{position: fixed;top: 45%;left: 27%;}
