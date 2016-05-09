@@ -255,6 +255,7 @@
                 var ID = result.id;
                 var email = result.email;
                 var name = result.name;
+                window.localStorage.setItem("email", email);                
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/script/gcm/getUser.php',
