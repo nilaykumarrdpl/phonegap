@@ -293,7 +293,7 @@
         }
         
         function connectNewSession() {
-            db.transaction(deleteUserData);
+            db.transaction(deleteUserData,errorCB);
             $('.continue-with-current-window').hide();
             $('.app-initialise-first').show();
         }
