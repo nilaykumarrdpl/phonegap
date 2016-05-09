@@ -137,7 +137,7 @@
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
-                //isDeviceExistInDB('460');
+                isDeviceExistInDB('460');
                 $('#load_light').hide();
                 $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
@@ -404,7 +404,8 @@
                 if (!validateEmail(email.val())) { alert('Invalid Email Address');email.focus();return;}
                 if(password_r.val() == '' || password_r.val().length <6){alert('Please enter 6 or more characters.');password_r.focus();return;}
                 if(password_r.val() != confirm_password_r.val()){alert('Please make sure your passwords match');confirm_password_r.focus();return;}
-
+                window.localStorage.setItem("email",email);
+                window.localStorage.setItem("password",password_r);
                 var form = $(formId); 
                 var params = form.serialize();
                 //alert(params);
