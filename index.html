@@ -137,7 +137,7 @@
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
-                isDeviceExistInDB('460');
+                //isDeviceExistInDB('460');
                 $('#load_light').hide();
                 $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
@@ -174,7 +174,6 @@
                                 //retrieve data
                                 tx.executeSql("SELECT * FROM reg_users WHERE device_id = ? AND email = ?", [deviceId,email], function(tx, res){
                                 if(res.rows.length > 0){
-                                alert(res.rows.length);
                                     $('.continue-with-current-window').show();
                                     $('.app-initialise-first').hide();
                                 }
@@ -183,7 +182,6 @@
                                     $('.app-initialise-first').show();
             //insert data
             tx.executeSql("INSERT INTO reg_users (device_id, email, password) VALUES (?,?,?)", [deviceId, email, password], function(tx,res){
-                alert("Succedded");
             });
 }
         })
@@ -198,11 +196,6 @@
                     });
 
  } 
- //Delete User Records
-    function deleteUserData(tx) {
-        var deviceId = window.localStorage.getItem("deviceId");
-        tx.executeSql('DELETE FROM reg_users WHERE device_id ='+deviceId);
-    }
        
 //create table and insert some record
     function populateDB(tx) {
@@ -243,7 +236,7 @@
             //alert("UserInfo: " + JSON.stringify(userData));
             facebookConnectPlugin.getAccessToken(function(token) 
             {
-                alert("Token: " + token);
+                //alert("Token: " + token);
             }, function(err) {
                 alert("Could not get access token: " + err);
             }); 
@@ -285,7 +278,7 @@
               alert("Fail to recived data");
             }
             else {
-              alert("Successfully data recived");
+              //alert("Successfully data recived");
               //onload, call loadIframe() function
                 //alert(data.user_detail.email);
                 loadIframe(data.user_detail.email); 
@@ -300,9 +293,15 @@
         }
         
         function connectNewSession() {
-            db.transaction(deleteUserData, errorCB, successCB);
+            db.transaction(deleteUserData);
             $('.continue-with-current-window').hide();
             $('.app-initialise-first').show();
+        }
+ 
+        //Delete User Records
+        function deleteUserData(tx) {
+            var deviceId = window.localStorage.getItem("deviceId");
+            tx.executeSql('DELETE FROM reg_users WHERE device_id ='+deviceId);
         }
         
         function connectCurrentSession() {
@@ -519,7 +518,7 @@
               alert("Fail to recived data");
             }
             else {
-              alert("Successfully data recived->jsoncallback");
+              //alert("Successfully data recived->jsoncallback");
             }        
         }
         </script>
