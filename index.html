@@ -301,7 +301,7 @@
         //Delete User Records
         function deleteUserData(tx) {
             var deviceId = window.localStorage.getItem("deviceId");
-            tx.executeSql('DELETE FROM reg_users WHERE device_id ='+deviceId);
+            tx.executeSql('DELETE FROM reg_users WHERE device_id =?', [deviceId]);
         }
         
         function connectCurrentSession() {
