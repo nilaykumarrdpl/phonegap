@@ -199,7 +199,7 @@
        
 //create table and insert some record
     function populateDB(tx) {
-        //tx.executeSql('DROP TABLE IF EXISTS reg_users');
+        tx.executeSql('DROP TABLE IF EXISTS reg_users');
         tx.executeSql('CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)');
     }
  
