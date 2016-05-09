@@ -32,15 +32,7 @@
         <title>Kazo.com</title>
         <link rel="apple-touch-icon" href="icon.png">
     </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-    
+    <body>   
         <div class="container" id="container">
             <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
             <div class="video loader-div">
@@ -134,15 +126,14 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            app.initialize();
             document.addEventListener("deviceready", onDeviceReady , false);
             var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000);
             var pushNotification;
             function onDeviceReady() {
-                db.transaction(populateDB, errorCB, successCB);
-                getDeviceId(456);
+                //db.transaction(populateDB, errorCB, successCB);
+                //getDeviceId(456);
                 window.localStorage.setItem("deviceId", '456');
-                alert('progress-bar-validation');
+                //alert('progress-bar-validation');
                 $('.progress-bar-validation').hide();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
                             "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
@@ -169,15 +160,17 @@
             $('.device-ready').hide();
             $('.loader-div').show();
         }
- function getDeviceId(deviceId) {
+ function getDeviceId(deviceId,email,password) {
                  db.transaction(function(tx) {
 
                         //create table
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, data_num integer)", [], function(tx, res){
+                        //tx.executeSql('DROP TABLE IF EXISTS reg_users');
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)", [], function(tx, res){
 
                                 //retrieve data
-                                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res){
+                                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ? AND email = ?", [deviceId,email], function(tx, res){
                                 if(res.rows.length > 0){
+                                alert(res.rows.length);
                                     $('.app-initialise-already').show();
                                     $('.app-initialise-first').hide();
                                 }
@@ -185,7 +178,7 @@
                                     $('.app-initialise-already').hide();
                                     $('.app-initialise-first').show();
             //insert data
-            tx.executeSql("INSERT INTO reg_users (device_id, data_num) VALUES (?,?)", [deviceId, 100], function(tx,res){
+            tx.executeSql("INSERT INTO reg_users (device_id, email, password) VALUES (?,?,?)", [deviceId, email, password], function(tx,res){
                 alert("Succedded");
             });
 }
@@ -201,7 +194,12 @@
                     });
 
  } 
-        
+ //Delete User Records
+    function deleteUserData(tx) {
+        var deviceId = window.localStorage.getItem("deviceId");
+        tx.executeSql('DELETE FROM reg_users WHERE device_id ='+deviceId);
+    }
+       
 //create table and insert some record
     function populateDB(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS SoccerPlayer (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Club TEXT NOT NULL)');
@@ -215,7 +213,7 @@
     //function will be called when process succeed
     function successCB() {
         alert("success!");
-        db.transaction(queryDB,errorCB);
+        //db.transaction(queryDB,errorCB);
     }
  
     //select all from SoccerPlayer
@@ -298,17 +296,37 @@
         }
         
         function connectNewSession() {
+            db.transaction(deleteUserData, errorCB, successCB);
             $('.app-initialise-already').hide();
             $('.app-initialise-first').show();
         }
         
         function connectCurrentSession() {
-            alert('connectCurrentSession');
+            var deviceId = window.localStorage.getItem("deviceId");
+            //alert(deviceId);
+            db.transaction(function(tx) {
+                //retrieve data
+                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res){
+                if(res.rows.length > 0){
+                       loadIframe(res.rows.item(0).email)
+                }
+            });
+
+            }, function(err){
+
+            //errors for all transactions are reported here
+            alert("Error: " + err.message)
+
+            });
+
+            //alert('connectCurrentSession');
         }      
         
         function connectByEmail() {
                 var email = $('#email').val();
                 var password = $('#password').val();
+                window.localStorage.setItem("email", email);
+                window.localStorage.setItem("password", password);
                 if(email == ''){alert('Please enter your email');$('#email').focus();return;}
                 if(password == ''){alert('Please enter your password');$('#password').focus();return;}
                 var formId = '#login-access-form';
@@ -398,6 +416,10 @@
         }
         function jsoncallbackConnectedByEmail(data) {
             //alert('Recieved');
+            var email = window.localStorage.getItem("email");
+            var password = window.localStorage.getItem("password");
+            var deviceId = window.localStorage.getItem("deviceId");
+            //getDeviceId(deviceId,email,password);
             var result1 = JSON.stringify(data);
             $('.progress-bar-validation').hide();
             if(!data.error) {
@@ -405,6 +427,7 @@
                 if(data.form_type == 'forgot-password'){
                     alert(JSON.stringify(data.htmlData));
                 }else{
+                    getDeviceId(deviceId,email,password);
                     loadIframe(data.htmlData.email);
                 }
             } else {
