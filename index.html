@@ -34,7 +34,6 @@
     </head>
     <body>   
         <div class="container" id="container">
-            <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
             <div class="video loader-div">
                 <div class="header-language-background">
                   <div class="header-language-container">
@@ -118,6 +117,7 @@
                     </div>
                 </div>
             </div>
+            <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
 
         </div>
         <div class="container-offline" style="display:none">
@@ -130,18 +130,18 @@
             var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000);
             var pushNotification;
             function onDeviceReady() {
-                //db.transaction(populateDB, errorCB, successCB);
+                db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
-                window.localStorage.setItem("deviceId", '456');
+                //window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
+                //isDeviceExistInDB('460');
                 $('.progress-bar-validation').hide();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
                             "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
                 push.on('registration', function(data) {
-                    console.log(data.registrationId);
-                    $("#gcm_id").html(data.registrationId);
                     var deviceId = data.registrationId;
                     window.localStorage.setItem("deviceId", deviceId);
+                    isDeviceExistInDB(deviceId);
                     $.ajax({
                         type: 'GET',
                         url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
@@ -160,7 +160,7 @@
             $('.device-ready').hide();
             $('.loader-div').show();
         }
- function getDeviceId(deviceId,email,password) {
+ function getDeviceId(deviceId,email,password) {alert(deviceId);
                  db.transaction(function(tx) {
 
                         //create table
@@ -202,6 +202,7 @@
        
 //create table and insert some record
     function populateDB(tx) {
+        //tx.executeSql('DROP TABLE IF EXISTS reg_users');
         tx.executeSql('CREATE TABLE IF NOT EXISTS SoccerPlayer (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Club TEXT NOT NULL)');
     }
  
@@ -320,7 +321,27 @@
             });
 
             //alert('connectCurrentSession');
-        }      
+        }    
+        
+        function isDeviceExistInDB(deviceId){
+                        db.transaction(function(tx) {
+                //retrieve data
+                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res){
+                //alert("SELECT * FROM reg_users WHERE device_id = "+deviceId);
+                //alert(res.rows.length);
+                if(res.rows.length <= 0){
+                    $('.app-initialise-already').hide();
+                    $('.app-initialise-first').show();
+                }
+            });
+
+            }, function(err){
+
+            //errors for all transactions are reported here
+            alert("Error: " + err.message)
+
+            });
+        }
         
         function connectByEmail() {
                 var email = $('#email').val();
@@ -436,8 +457,10 @@
         }
         
         function loadIframe(email){
+            $( ".loader-div" ).css("display", "block");
+            $( ".app-initialise-already" ).remove();
+        
             $('.loader-iframe').css("display", "block");
-            $( ".loader-div" ).remove();
         
             var iframeURL = 'http://54.169.245.192/kazo/autoLogin.php';
             var iframeID = 'MyIFrame';
@@ -490,7 +513,7 @@
               alert("Fail to recived data");
             }
             else {
-              alert("Successfully data recived");
+              alert("Successfully data recived->jsoncallback");
             }        
         }
         </script>
