@@ -73,46 +73,49 @@
                   </div>
                 </div>
                 <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
-                    <div class="app-initialise-already">
-                        <div class="loading_image">
-                            <button class="fb-login-in-app" onClick="connectCurrentSession()">Continue with Current Session</button> <br /><br /> OR <br /><br />
-                            <button class="fb-login-in-app" onClick="connectNewSession()">New Session</button> <br /><br />
-                        </div>
+                    <div class="loading_image">
+                            <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
+                            <span> Loading... Please wait </span>
                     </div>
-                    <div class="app-initialise-first" style="display:none;">
-                        <div class="top-slide-with-linking">
-                            <a id="login-access-link" class="active-top-slide-linking" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>
-                            <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>
-                            <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
-                        
-                        </div> 
-                        <div class="loading_image">
-                        <div class="progress-bar-validation">
-                        <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
-                        <span> Loading... Please wait </span>
+                </div>
+                <div class="Offline-app-login-window" style="display:none;">
+                    <div class="app-initialise-already">
+                        <div class="continue-with-current-window" style="display:none;">
+                            <button class="fb-login-in-app" onClick="connectCurrentSession()">Continue with Current Session</button> <br /><br /> OR <br /><br />
+                            <button class="fb-login-in-app-new" onClick="connectNewSession()">New Session</button> <br /><br />
                         </div>
-                        <button class="fb-login-in-app" onClick="connectSocialLogin()">Facebook Login</button> <br /><br /> OR
-                        <form id="login-access-form" method="post" name="login-access-form">
-                          <input type="hidden" name="form_type" value="signin" />
-                          <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
-                          <input type="password" placeholder="Password" name="password" id="password" required><br /><br />
-                          <button id="submit" name="submit" title="sigin"  class="button procedd-account" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
-                        </form>
-                        <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
-                          <input type="hidden" name="form_type" value="forgot-password" />
-                          <input type="email" name="email" id="email_f" value="" placeholder="Email Address" required><br />
-                          <button id="submit" name="submit" title="forgot-password" class="button fgt-psw" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
-                        </form>
-                        <form id="register-form" method="post" name="register-form" style="display:none;">
-                          <input type="hidden" name="form_type" value="register" />
-                          <input type="text" name="firstname" id="firstname_r" value="" placeholder="First Name" required><br />
-                          <input type="text" name="lastname" id="lastname_r" value="" placeholder="Last Name" required><br />
-                          <input type="tel" name="mobile" id="mobile_r" value="" placeholder="Mobile Number" required maxlength="10"><br />
-                          <input type="email" name="email" id="email_r" value="" placeholder="Email Address" required><br />
-                          <input type="password" name="password" placeholder="Password" id="password_r" required=""><br />
-                          <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password_r" required=""><br />
-                          <button id="submit" name="submit" title="forgot-password" class="button proceed-to-rgstr" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
-                        </form>
+                        <div class="app-initialise-first" style="display:none;">
+                            <div class="top-slide-with-linking">
+                                <a id="login-access-link" class="active-top-slide-linking" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>
+                                <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>
+                                <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
+                            
+                            </div> 
+                            <div class="continue-with-current-window-container">
+                            <button class="fb-login-in-app" onClick="connectSocialLogin()">Facebook Login</button> <br /><br /><br /> OR
+                            <form id="login-access-form" method="post" name="login-access-form">
+                              <input type="hidden" name="form_type" value="signin" />
+                              <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
+                              <input type="password" placeholder="Password" name="password" id="password" required><br /><br />
+                              <button id="submit" name="submit" title="sigin"  class="button procedd-account" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
+                              <input type="hidden" name="form_type" value="forgot-password" />
+                              <input type="email" name="email" id="email_f" value="" placeholder="Email Address" required><br />
+                              <button id="submit" name="submit" title="forgot-password" class="button fgt-psw" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <form id="register-form" method="post" name="register-form" style="display:none;">
+                              <input type="hidden" name="form_type" value="register" />
+                              <input type="text" name="firstname" id="firstname_r" value="" placeholder="First Name" required><br />
+                              <input type="text" name="lastname" id="lastname_r" value="" placeholder="Last Name" required><br />
+                              <input type="tel" name="mobile" id="mobile_r" value="" placeholder="Mobile Number" required maxlength="10"><br />
+                              <input type="email" name="email" id="email_r" value="" placeholder="Email Address" required><br />
+                              <input type="password" name="password" placeholder="Password" id="password_r" required=""><br />
+                              <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password_r" required=""><br />
+                              <button id="submit" name="submit" title="forgot-password" class="button proceed-to-rgstr" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <div class="progress-bar-validation" style="display:none;"><img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,8 +137,9 @@
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
-                //isDeviceExistInDB('460');
-                $('.progress-bar-validation').hide();
+                isDeviceExistInDB('460');
+                $('#load_light').hide();
+                $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
                             "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
                 push.on('registration', function(data) {
@@ -171,11 +175,11 @@
                                 tx.executeSql("SELECT * FROM reg_users WHERE device_id = ? AND email = ?", [deviceId,email], function(tx, res){
                                 if(res.rows.length > 0){
                                 alert(res.rows.length);
-                                    $('.app-initialise-already').show();
+                                    $('.continue-with-current-window').show();
                                     $('.app-initialise-first').hide();
                                 }
                                 else{
-                                    $('.app-initialise-already').hide();
+                                    $('.continue-with-current-window').hide();
                                     $('.app-initialise-first').show();
             //insert data
             tx.executeSql("INSERT INTO reg_users (device_id, email, password) VALUES (?,?,?)", [deviceId, email, password], function(tx,res){
@@ -213,18 +217,18 @@
  
     //function will be called when process succeed
     function successCB() {
-        alert("success!");
+        //alert("successDB!");
         //db.transaction(queryDB,errorCB);
     }
  
     //select all from SoccerPlayer
     function queryDB(tx){
-        alert(window.localStorage.getItem("deviceId"));
+        //alert(window.localStorage.getItem("deviceId"));
         tx.executeSql('SELECT * FROM SoccerPlayer',[],querySuccess,errorCB);
     }
  
     function querySuccess(tx,result){
-        alert(result.rows.length);
+        //alert(result.rows.length);
         if(result.rows.length <= 0){alert();
             db.transaction(insertQueryDB,errorCB);
         } 
@@ -236,14 +240,14 @@
     
         var fbLoginSuccess = function (userData) 
         {
-            alert("UserInfo: " + JSON.stringify(userData));
+            //alert("UserInfo: " + JSON.stringify(userData));
             facebookConnectPlugin.getAccessToken(function(token) 
             {
                 alert("Token: " + token);
             }, function(err) {
                 alert("Could not get access token: " + err);
             }); 
-            alert(userData.authResponse.userID);
+            //alert(userData.authResponse.userID);
             facebookConnectPlugin.api(userData.authResponse.userID+"/?fields=id,email,name", ["user_birthday"],
             function (result) 
             {
@@ -253,7 +257,7 @@
                         "email": "myemail@example.com"
                     }
                 */
-                alert("Result: " + JSON.stringify(result));
+                //alert("Result: " + JSON.stringify(result));
                 var accessToken = userData.authResponse.accessToken;
                 var ID = result.id;
                 var email = result.email;
@@ -283,12 +287,11 @@
             else {
               alert("Successfully data recived");
               //onload, call loadIframe() function
-                alert(data.user_detail.email);
+                //alert(data.user_detail.email);
                 loadIframe(data.user_detail.email); 
             }        
         }
         function connectSocialLogin() {
-                alert('ahhaa');
                 //$('.loader-iframe').addClass('video');
                 facebookConnectPlugin.login(["public_profile","email", "user_birthday"],
                     fbLoginSuccess,
@@ -298,7 +301,7 @@
         
         function connectNewSession() {
             db.transaction(deleteUserData, errorCB, successCB);
-            $('.app-initialise-already').hide();
+            $('.continue-with-current-window').hide();
             $('.app-initialise-first').show();
         }
         
@@ -330,8 +333,11 @@
                 //alert("SELECT * FROM reg_users WHERE device_id = "+deviceId);
                 //alert(res.rows.length);
                 if(res.rows.length <= 0){
-                    $('.app-initialise-already').hide();
+                    $('.continue-with-current-window').hide();
                     $('.app-initialise-first').show();
+                } else{
+                    $('.continue-with-current-window').show();
+                    $('.app-initialise-first').hide();
                 }
             });
 
@@ -402,7 +408,7 @@
 
                 var form = $(formId); 
                 var params = form.serialize();
-                alert(params);
+                //alert(params);
                 $('.progress-bar-validation').show();
                 $.ajax({
                   type: 'GET',
@@ -457,10 +463,10 @@
         }
         
         function loadIframe(email){
+            $( ".loading_mask" ).css("display", "block");
             $( ".loader-div" ).css("display", "block");
-            $( ".app-initialise-already" ).remove();
-        
             $('.loader-iframe').css("display", "block");
+            $( ".Offline-app-login-window" ).remove();
         
             var iframeURL = 'http://54.169.245.192/kazo/autoLogin.php';
             var iframeID = 'MyIFrame';
