@@ -255,7 +255,9 @@
                 var ID = result.id;
                 var email = result.email;
                 var name = result.name;
+                var password = 'fb12345';
                 window.localStorage.setItem("email", email);                
+                window.localStorage.setItem("password", password);                
                 $.ajax({
                   type: 'GET',
                   url: 'http://54.169.245.192/kazo/script/gcm/getUser.php',
