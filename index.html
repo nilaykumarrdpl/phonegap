@@ -135,7 +135,7 @@
             var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000);
             var pushNotification;
             function onDeviceReady() {
-                //checkConnection();
+                checkConnection();
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
@@ -489,7 +489,7 @@
         }
 
         function checkConnection() {
-            var  networkConnectionType =  navigator.network.connection.type;
+            var  networkConnectionType =  navigator.connection.type;
             alert('Connection Type: ' +  networkConnectionType );
             if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown"){
                 $('.container-offline').show();
