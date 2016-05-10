@@ -173,7 +173,11 @@
         }
         function onOffline() {
             // Handle the offline event
-            alert('you are offline');
+            $('.container-offline').show();
+            $( ".loading_mask" ).hide();
+            $( ".loader-div" ).hide();
+            $('.loader-iframe').hide();
+            
         }
  function getDeviceId(deviceId,email,password) {//alert(deviceId);
                  db.transaction(function(tx) {
