@@ -79,7 +79,7 @@
                         <a href="" class="offline-refresh-button">Refresh</a>
                     </span>
                 </div> 
-                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;display:none;">
+                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
                     <div class="loading_image">
                             <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
                             <span> Loading... Please wait </span>
@@ -166,7 +166,7 @@
             });
             push.on('notification', function(data) {
                 console.log(data.message);
-                alert(data.title+" Message: " +data.message+" image: " +data.image);
+                //alert(data.title+" Message: " +data.message+" image: " +data.image);
             });
             $('.device-ready').hide();
             $('.loader-div').show();
