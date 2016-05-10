@@ -264,15 +264,41 @@ form#login-access-form input {
               content: "\f142";
             }
 
+@media all and (min-width:200px) and (max-width:2000px) {
+
+
+           
+.header-main-inner-sects {
+    color: #fff;
+    font-family: calibri;
+    font-size: 23px;
+    height: 30px;
+    line-height: 25px;
+    margin: 0 auto;
+    padding: 8px 0;
+    text-align: center;
+    width: 94%;
+}
+body .header-language-background{background:#000; position:relative; z-index:99999; height:47px;}
+
+}
+
+
 
             @media all and (min-width:200px) and (max-width:640px) {
 
-            .header-main-inner-sects {
-                height: 30px;
-                margin: 0 auto;
-                padding: 8px 0;
-                width: 94%;
-            }
+           
+.header-main-inner-sects {
+    color: #fff;
+    font-family: calibri;
+    font-size: 23px;
+    height: 30px;
+    line-height: 25px;
+    margin: 0 auto;
+    padding: 8px 0;
+    text-align: center;
+    width: 94%;
+}
             body .header-language-background{background:#000; position:relative; z-index:99999; height:47px;}
             body{margin:0;padding:0;}
             .header-main-part {    background: #000 none repeat scroll 0 0;    height: auto;}

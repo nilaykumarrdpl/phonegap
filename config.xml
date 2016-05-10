@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.kazo" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-  <name>Kazo</name>
-  <description>Buy online ladies western wear - Huge collection of western dresses, evening wear, tops, t-shirts, shirts, party wear, jeans, leggings, jeggings, accessories and more online shopping in India. Free Shipping, Cash on delivery, 15 Days Return.</description>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.highstreet" version="1.0.0">
+  <name>highstreet</name>
+  <description>Hello World sample application that responds to the deviceready event.</description>
   <author email="development@purplecommerce.com" href="http://kazo.com">Kazo Team</author>
   <content src="index.html" />
   <preference name="permissions" value="none"/>
