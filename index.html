@@ -173,9 +173,10 @@
         }
         function onOffline() {
             // Handle the offline event
+            $( ".loader-div" ).show();
             $('.container-offline').show();
             $( ".loading_mask" ).hide();
-            $( ".loader-div" ).hide();
+            $( ".Offline-app-login-window" ).hide();
             $('.loader-iframe').hide();
             
         }
