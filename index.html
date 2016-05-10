@@ -72,7 +72,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
+                <div class="container-offline" style="display:none">
+                    <h2>No connection</h2>
+                    <span>Please check your internet connection.</span>
+                </div> 
+                
+                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;display:none;">
                     <div class="loading_image">
                             <img alt="loading your required product" src="http://54.169.245.192/kazo/skin/frontend/rwd/kazo/images/loading_p.gif">
                             <span> Loading... Please wait </span>
@@ -123,9 +128,7 @@
             <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
 
         </div>
-        <div class="container-offline" style="display:none">
-            No network connection ... 
-        </div>        
+       
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
@@ -133,6 +136,7 @@
             var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000);
             var pushNotification;
             function onDeviceReady() {
+                checkConnection();
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
@@ -277,6 +281,9 @@
         
         function jsoncallbackUser(data)
         {
+            var email = window.localStorage.getItem("email");
+            var password = window.localStorage.getItem("password");
+            var deviceId = window.localStorage.getItem("deviceId");
             if($.trim(data) == "false") {
               alert("Fail to recived data");
             }
@@ -284,6 +291,7 @@
               //alert("Successfully data recived");
               //onload, call loadIframe() function
                 //alert(data.user_detail.email);
+                getDeviceId(deviceId,email,password);
                 loadIframe(data.user_detail.email); 
             }        
         }
@@ -485,7 +493,6 @@
             var  networkConnectionType =  navigator.network.connection.type;
             alert('Connection Type: ' +  networkConnectionType );
             if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown"){
-                $('.container').hide();
                 $('.container-offline').show();
            }
         }            
