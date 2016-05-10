@@ -111,16 +111,16 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             document.addEventListener("deviceready", onDeviceReady , false);
-            var db = window.openDatabase("KAZO_DB", "1.0", "Just a KAZO DB", 200000);
+            var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
             var pushNotification;
             function onDeviceReady() {
                 checkConnection();
                 document.addEventListener("offline", onOffline, false);
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
-                //window.localStorage.setItem("deviceId", '460');
+                window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
-                //isDeviceExistInDB('460');
+                isDeviceExistInDB('460');
                 $('#load_light').hide();
                 $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
@@ -441,13 +441,14 @@
             }
         }
         function jsoncallbackConnectedByEmail(data) {
-            //alert('Recieved');
+            alert('Recieved');
             var email = window.localStorage.getItem("email");
             var password = window.localStorage.getItem("password");
             var deviceId = window.localStorage.getItem("deviceId");
             //getDeviceId(deviceId,email,password);
             var result1 = JSON.stringify(data);
             $('.progress-bar-validation').hide();
+            alert(result1);
             if(!data.error) {
                 //alert(data.htmlData.email);
                 if(data.form_type == 'forgot-password'){
@@ -474,7 +475,7 @@
             //setiFrame's SRC attribute
             var iFrameWin = document.getElementById(iframeID);
             iFrameWin.src = iframeURL + "?email="+email+"&password="+password;
-            //alert(iFrameWin.src);
+            alert(iFrameWin.src);
         }
 
         function checkConnection() {
