@@ -63,7 +63,7 @@
                           <!-- Skip Links -->
                           <div class="skip-links"> <a class="common-toggle" href="#header-nav"> <i class="fa fa-navicon"></i>  </a> </div>
                           <!-- Search -->
-                          <a class="logo-loader" href="http://54.169.245.192/kazo/">
+                          <a class="logo-loader" href="#">
                           <div class="app-logo"> <img src="fonts/k.jpg"> </div>
                           </a>
                           <div class="srch-head-app"><a href="javascript:void(0);"><i class="fa fa-search"></i></a></div>
@@ -139,6 +139,7 @@
             var pushNotification;
             function onDeviceReady() {
                 checkConnection();
+                document.addEventListener("offline", onOffline, false);
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
@@ -169,6 +170,10 @@
             });
             $('.device-ready').hide();
             $('.loader-div').show();
+        }
+        function onOffline() {
+            // Handle the offline event
+            alert('you are offline');
         }
  function getDeviceId(deviceId,email,password) {//alert(deviceId);
                  db.transaction(function(tx) {
@@ -494,7 +499,6 @@
         function checkConnection() {
             var  networkConnectionType =  navigator.connection.type;
             if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown"){
-                alert('Connection Type: ' +  networkConnectionType );
                 $('.container-offline').show();
            }
         }            
