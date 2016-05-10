@@ -72,9 +72,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="container-offline" style="display:none">
+                <div class="container-offline" style="display:block">
                     <h2>No connection</h2>
-                    <span>Please check your internet connection.</span>
+                    <span>
+                        Please check your internet connection.<br />
+                        <a href="" class="offline-refresh-button">Refresh</a>
+                    </span>
                 </div> 
                 <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;display:none;">
                     <div class="loading_image">
@@ -167,7 +170,7 @@
             $('.device-ready').hide();
             $('.loader-div').show();
         }
- function getDeviceId(deviceId,email,password) {alert(deviceId);
+ function getDeviceId(deviceId,email,password) {//alert(deviceId);
                  db.transaction(function(tx) {
 
                         //create table
@@ -490,8 +493,8 @@
 
         function checkConnection() {
             var  networkConnectionType =  navigator.connection.type;
-            alert('Connection Type: ' +  networkConnectionType );
             if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown"){
+                alert('Connection Type: ' +  networkConnectionType );
                 $('.container-offline').show();
            }
         }            
