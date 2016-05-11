@@ -267,6 +267,7 @@
                     }
                 */
                 alert("Result: " + JSON.stringify(result));
+                alert('http://54.169.245.192/kazo/getFacebook.php');
                 var accessToken = userData.authResponse.accessToken;
                 var ID = result.id;
                 var email = result.email;
@@ -308,6 +309,7 @@
         }
         function connectSocialLogin() {
                 //$('.loader-iframe').addClass('video');
+                $('.progress-bar-validation').show();
                 facebookConnectPlugin.login(["public_profile","email", "user_birthday"],
                     fbLoginSuccess,
                     function (error) { alert("" + error) }
