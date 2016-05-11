@@ -252,7 +252,7 @@
                 window.localStorage.setItem("password", password);                
                 $.ajax({
                   type: 'GET',
-                  url: 'http://54.169.245.192/kazo/getFacebook.php',
+                  url: 'http://stores.purplestores.in/demo_highstreet/getFacebook.php',
                   dataType: 'jsonp',
                   async: false,
                   jsonpCallback: 'jsoncallbackUser',
@@ -273,7 +273,7 @@
             var password = window.localStorage.getItem("password");
             var deviceId = window.localStorage.getItem("deviceId");
             var result1 = JSON.stringify(data);
-            alert(result1);
+            //alert(result1);
             $('.progress-bar-validation').hide();
             if(!data.error) {
                     getDeviceId(deviceId,email,password);
