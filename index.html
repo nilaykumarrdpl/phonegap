@@ -284,6 +284,7 @@
         }
         function connectSocialLogin() {
                 //$('.loader-iframe').addClass('video');
+                $('.progress-bar-validation').show();
                 facebookConnectPlugin.login(["public_profile","email", "user_birthday"],
                     fbLoginSuccess,
                     function (error) { alert("" + error) }
