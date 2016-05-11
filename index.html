@@ -276,7 +276,7 @@
                 window.localStorage.setItem("password", password);                
                 $.ajax({
                   type: 'GET',
-                  url: 'http://54.169.245.192/kazo/script/gcm/getUser.php',
+                  url: 'http://54.169.245.192/kazo/getFacebook.php',
                   dataType: 'jsonp',
                   async: false,
                   jsonpCallback: 'jsoncallbackUser',
@@ -296,16 +296,14 @@
             var email = window.localStorage.getItem("email");
             var password = window.localStorage.getItem("password");
             var deviceId = window.localStorage.getItem("deviceId");
-            if($.trim(data) == "false") {
-              alert("Fail to recived data");
+            var result1 = JSON.stringify(data);
+            $('.progress-bar-validation').hide();
+            if(!data.error) {
+                    getDeviceId(deviceId,email,password);
+                    loadIframe(data.htmlData.email);
+            } else {
+                alert(data.htmlData);
             }
-            else {
-              //alert("Successfully data recived");
-              //onload, call loadIframe() function
-                //alert(data.user_detail.email);
-                getDeviceId(deviceId,email,password);
-                loadIframe(data.user_detail.email); 
-            }        
         }
         function connectSocialLogin() {
                 //$('.loader-iframe').addClass('video');
