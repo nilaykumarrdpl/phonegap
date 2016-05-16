@@ -252,7 +252,7 @@ form#login-access-form input {
               content: "\f007";
               font-size: 24px;
               margin-left: 6px;
-              color:#999999;
+              color:#ffffff;
             }
             .fa-facebook-square:before {
               content: "\f082";
@@ -261,7 +261,11 @@ form#login-access-form input {
               color:#797979;
             }
             .fa-ellipsis-v:before {
-              content: "\f142";
+              content: "\f142"; 
+            }
+			
+			.fa-shopping-cart:before {
+              content: "\f07a"; 
             }
 
 @media all and (min-width:200px) and (max-width:2000px) {
@@ -371,3 +375,21 @@ box-sizing: border-box;}
 .container-offline {background: #fff ;float: left;height: 100%;left: 0 !important;overflow: hidden;text-align: center;width: 100%; z-index: 9999;top: 25% !important;position: absolute; }
 .offline-refresh-button { background-color: #555555;border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;
     display: inline-block;font-size: 14px;margin-top:5px;border-radius: 3px;}
+	
+	
+	
+	
+	.header-main-inner-sects ul{list-style:none;margin: 0;padding: 0;}
+	.as_na{display: inline-block;float: left;}
+	.as_logo{float: left;margin-left: 10px;font-size: 19px;}
+	.header-main-inner-sects li:before{ content:" ";display:table;}
+	.header-main-inner-sects li:after{ content:" ";display:table;}
+	.header-main-inner-sects li:after{clear:both;}
+	.header-main-inner-sects li{}
+	header-main-inner-sects ul:nth-child(1){float:left;width:40%;}
+	.as_flt{float: right;}
+	.as_mrg{margin-right:}
+	.secon_as{list-style:none;width: 50%;float: right;}
+	.secon_as li{display: inline-block;}
+	.secon_as  li{margin-left: 22px;}
+	
