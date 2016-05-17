@@ -267,6 +267,10 @@ form#login-access-form input {
 			.fa-shopping-cart:before {
               content: "\f07a"; 
             }
+            
+            .fa-search:before {
+              content: "\f002"; 
+            }
 
 @media all and (min-width:200px) and (max-width:2000px) {
 
@@ -379,7 +383,7 @@ box-sizing: border-box;}
 	
 	
 	
-	.header-main-inner-sects ul{list-style:none;margin: 0;padding: 0;}
+	.header-main-inner-sects ul{list-style:none;margin: 0;padding: 0;text-align:right}
 	.as_na{display: inline-block;float: left;}
 	.as_logo{float: left;margin-left: 10px;font-size: 19px;}
 	.header-main-inner-sects li:before{ content:" ";display:table;}
@@ -392,4 +396,42 @@ box-sizing: border-box;}
 	.secon_as{list-style:none;width: 50%;float: right;}
 	.secon_as li{display: inline-block;}
 	.secon_as  li{margin-left: 22px;}
+    #load_light .loading_image {
+    position: absolute;
+    top: 45% !important;
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+#load_light {
+    background: #fff;
+    float: left;
+    height: 100%;
+    left: 0 !important;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    z-index: 9999;
+}
+#load_light .loading_image img {
+    margin: 0 auto !important;
+    padding-left: 5%;
+}
+.loader-div {
+    z-index: 99;
+}
+#load_light .loading_image img {
+    margin: 0 auto !important;
+    padding-left: 5%;
+}
+.loading_image span {
+    color: #000 !important;
+    display: block;
+    text-align: center !important;
+    width: 100%;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: -3px;
+}
 	
