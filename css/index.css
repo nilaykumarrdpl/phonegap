@@ -184,7 +184,7 @@ form#login-access-form input {
                 height: 0;
             }
             .video {
-                position: absolute;
+                position: static;
                 top: 0;
                 left: 0;
                 width: 100%;
