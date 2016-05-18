@@ -38,29 +38,9 @@
                 <div class="header-language-background">
                   <div class="header-language-container">
                     <div class="header-main-part">
-                    
                       <div class="header-main-inner-sects">
-                       <div>
-                       <ul>
-                       <li class="as_na"><i class="fa fa-navicon fa-2x"></i></li>
-                       <li class="as_logo">Purple Stores</li>
-                       </ul>
-                       
-                       <ul class="secon_as">
-                      
-                      
-                       
-                       
-                       <li><i class="fa fa-search as_flt as_mrg"></i></li>
-                        <li><i class="fa fa-shopping-cart as_flt"></i></li>
-                       <li><i class="fa fa-user as_flt as_mrg"></i></li>
-                        <li><i class="fa fa-ellipsis-v as_flt as_mrg"></i></li>
-                       </ul>
-                       </div>
+                        Purple Stores
                       </div>
-                      
-                      
-                      
                     </div>
                   </div>
                 </div>
@@ -71,7 +51,7 @@
                         <a href="" class="offline-refresh-button">Refresh</a>
                     </span>
                 </div> 
-                <div class="loading_mask" id="load_light" style="position: fixed; top: 0px; left: 0px;">
+                <div class="loading_mask as_abs" id="load_light">
                     <div class="loading_image">
                             <img alt="loading your required product" src="img/loading_p.gif">
                             <span> Loading... Please wait </span>
@@ -135,7 +115,7 @@
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
-                //alert('progress-bar-validation');
+                alert('progress-bar-validation');
                 //isDeviceExistInDB('460');
                 $('#load_light').hide();
                 $('.Offline-app-login-window').show();
@@ -479,6 +459,7 @@
         }
         
         function loadIframe(email){
+        alert('loadIframe');
             $( ".loading_mask" ).css("display", "block");
             $( ".loader-div" ).css("display", "block");
             $('.loader-iframe').css("display", "block");
