@@ -25,8 +25,6 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Purple Stores App</title>
@@ -34,7 +32,13 @@
     </head>
     <body>   
         <div class="container" id="container">
-            <div class="video loader-div">
+           <div class="video splash-screen-div">
+                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-200-320" />
+                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-320-480" />
+                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-480-800" />
+                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-720-1280" />
+            </div>
+            <div class="video loader-div" style="dispaly:none;">
                 <div class="header-language-background">
                   <div class="header-language-container">
                     <div class="header-main-part">
@@ -51,7 +55,7 @@
                         <a href="" class="offline-refresh-button">Refresh</a>
                     </span>
                 </div> 
-                <div class="loading_mask as_abs" id="load_light">
+                <div class="loading_mask as_abs" id="load_light" style="display:none;">
                     <div class="loading_image">
                             <img alt="loading your required product" src="img/loading_p.gif">
                             <span> Loading... Please wait </span>
@@ -106,6 +110,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
+            $('.loader-div').hide();
             document.addEventListener("deviceready", onDeviceReady , false);
             var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
             var pushNotification;
@@ -115,9 +120,11 @@
                 db.transaction(populateDB, errorCB, successCB);
                 //getDeviceId(456);
                 //window.localStorage.setItem("deviceId", '460');
-                alert('progress-bar-validation');
+                //alert('progress-bar-validation');
                 //isDeviceExistInDB('460');
+                $('.splash-screen-div').remove();
                 $('#load_light').hide();
+                $('.loader-div').show();
                 $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
                             "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
@@ -459,7 +466,7 @@
         }
         
         function loadIframe(email){
-        alert('loadIframe');
+        //alert('loadIframe');
             $( ".loading_mask" ).css("display", "block");
             $( ".loader-div" ).css("display", "block");
             $('.loader-iframe').css("display", "block");
