@@ -32,13 +32,7 @@
     </head>
     <body>   
         <div class="container" id="container">
-           <div class="video splash-screen-div">
-                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-200-320" />
-                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-320-480" />
-                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-480-800" />
-                <img src="img/screen/android/screen-hdpi-portrait.gif" class="device-ready device-720-1280" />
-            </div>
-            <div class="video loader-div" style="dispaly:none;">
+            <div class="video loader-div">
                 <div class="header-language-background">
                   <div class="header-language-container">
                     <div class="header-main-part">
@@ -55,7 +49,7 @@
                         <a href="" class="offline-refresh-button">Refresh</a>
                     </span>
                 </div> 
-                <div class="loading_mask as_abs" id="load_light" style="display:none;">
+                <div class="loading_mask as_abs" id="load_light">
                     <div class="loading_image">
                             <img alt="loading your required product" src="img/loading_p.gif">
                             <span> Loading... Please wait </span>
@@ -110,7 +104,6 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            $('.loader-div').hide();
             document.addEventListener("deviceready", onDeviceReady , false);
             var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
             var pushNotification;
@@ -122,9 +115,7 @@
                 //window.localStorage.setItem("deviceId", '460');
                 //alert('progress-bar-validation');
                 //isDeviceExistInDB('460');
-                $('.splash-screen-div').remove();
                 $('#load_light').hide();
-                $('.loader-div').show();
                 $('.Offline-app-login-window').show();
                 var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
                             "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
