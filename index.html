@@ -220,12 +220,12 @@
         var fbLoginSuccess = function (userData) 
         {
             //alert("UserInfo: " + JSON.stringify(userData));
-            facebookConnectPlugin.getAccessToken(function(token) 
+            /*facebookConnectPlugin.getAccessToken(function(token) 
             {
                 //alert("Token: " + token);
             }, function(err) {
                 alert("Could not get access token: " + err);
-            }); 
+            });*/ 
             //alert(userData.authResponse.userID);
             facebookConnectPlugin.api(userData.authResponse.userID+"/?fields=id,email,name", ["user_birthday"],
             function (result) 
