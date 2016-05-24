@@ -31,7 +31,75 @@
         <link rel="apple-touch-icon" href="icon.png">
     </head>
     <body>   
-        <iframe frameborder="0" id="MyIFrame" src="http://stores.purplestores.in/store_iphone" class="video"></iframe> 
+        <div class="container" id="container">
+            <div class="video loader-div">
+                <div class="header-language-background">
+                  <div class="header-language-container">
+                    <div class="header-main-part">
+                      <div class="header-main-inner-sects">
+                        Purple Stores
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container-offline" style="display:none">
+                    <h2>No connection</h2>
+                    <span>
+                        Please check your internet connection.<br />
+                        <a href="" class="offline-refresh-button">Refresh</a>
+                    </span>
+                </div> 
+                <div class="loading_mask as_abs" id="load_light">
+                    <div class="loading_image">
+                            <img alt="loading your required product" src="img/loading_p.gif">
+                            <span> Loading... Please wait </span>
+                    </div>
+                </div>
+                <div class="Offline-app-login-window" style="display:none;">
+                    <div class="app-initialise-already">
+                        <div class="continue-with-current-window" style="display:none;">
+                            <button class="fb-login-in-app" onClick="connectCurrentSession()">Continue with Current Session</button> <br /><br /> OR <br /><br />
+                            <button class="fb-login-in-app-new" onClick="connectNewSession()">New Session</button> <br /><br />
+                        </div>
+                        <div class="app-initialise-first" style="display:none;">
+                            <div class="top-slide-with-linking">
+                                <a id="login-access-link" class="active-top-slide-linking" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Sign In</a>
+                                <a id="register-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">New User</a>
+                                <a id="forgot-password-link" href="javascript::void();" style="color:#ff9900; text-decoration:underline;font-size:12px; padding:10px 0 0 10px">Forgot Password</a>
+                            
+                            </div> 
+                            <div class="continue-with-current-window-container">
+                            <button class="fb-login-in-app" onClick="connectSocialLogin()">Facebook Login</button> <br /><br /><br /> OR
+                            <form id="login-access-form" method="post" name="login-access-form">
+                              <input type="hidden" name="form_type" value="signin" />
+                              <input type="email" name="email" id="email" value="" placeholder="Email Address" required><br />
+                              <input type="password" placeholder="Password" name="password" id="password" required><br /><br />
+                              <button id="submit" name="submit" title="sigin"  class="button procedd-account" type="button" onClick="connectByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <form id="forgot-password-form" method="post" name="forgot-password-form" style="display:none;">
+                              <input type="hidden" name="form_type" value="forgot-password" />
+                              <input type="email" name="email" id="email_f" value="" placeholder="Email Address" required><br />
+                              <button id="submit" name="submit" title="forgot-password" class="button fgt-psw" type="button" onClick="sendPasswordByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <form id="register-form" method="post" name="register-form" style="display:none;">
+                              <input type="hidden" name="form_type" value="register" />
+                              <input type="text" name="firstname" id="firstname_r" value="" placeholder="First Name" required><br />
+                              <input type="text" name="lastname" id="lastname_r" value="" placeholder="Last Name" required><br />
+                              <input type="tel" name="mobile" id="mobile_r" value="" placeholder="Mobile Number" required maxlength="10"><br />
+                              <input type="email" name="email" id="email_r" value="" placeholder="Email Address" required><br />
+                              <input type="password" name="password" placeholder="Password" id="password_r" required=""><br />
+                              <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password_r" required=""><br />
+                              <button id="submit" name="submit" title="forgot-password" class="button proceed-to-rgstr" type="button" onClick="registerByEmail()"><span><span>Submit</span></span></button>
+                            </form>
+                            <div class="progress-bar-validation" style="display:none;"><img alt="loading your required product" src="img/loading_p.gif"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <iframe frameborder="0" id="MyIFrame" class="video loader-iframe"></iframe>       
+
+        </div>
        
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
