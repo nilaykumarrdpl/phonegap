@@ -314,7 +314,7 @@ body .header-language-background{background:#333333; z-index:99999; height:47px;
     text-align: center;
     width: 94%;
 }
-            body .header-language-background{background:#000; position:relative; z-index:99999; height:47px;}
+            body .header-language-background{background:#000; position:absolute; z-index:99999; height:47px;width:100%;}
             body{margin:0;padding:0;}
             .header-main-part {    background: #333333 none repeat scroll 0 0;    height: auto;}
             .device-logo {    display: none;}
@@ -401,7 +401,6 @@ box-sizing: border-box;}
 	.as_mrg{margin-right:}
 	.secon_as{list-style:none;width: 52%;float: right;}
 	.secon_as li{display: inline-block;}
-	#MyIFrame{background:red;}
     
    
 	
