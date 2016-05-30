@@ -314,7 +314,7 @@ body .header-language-background{background:#333333; z-index:99999; height:47px;
     text-align: center;
     width: 94%;
 }
-            body .header-language-background{background:#000; position:absolute; z-index:99999; height:47px;width:100%;}
+            body .header-language-background{background:#000; position:fixed; z-index:99999; height:47px;width:100%; top:0px}
             body{margin:0;padding:0;}
             .header-main-part {    background: #333333 none repeat scroll 0 0;    height: auto;}
             .device-logo {    display: none;}
