@@ -244,6 +244,7 @@
 
 			}
 			function jsoncallbackFblogin(data) {
+				$('.progress-bar-validation').show();
 				var result = data;
 				var accessToken = result.accessToken;
 				var ID = result.id;
