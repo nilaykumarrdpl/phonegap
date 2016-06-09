@@ -228,7 +228,11 @@
 			function insertQueryDB(tx) {
 				tx.executeSql('INSERT INTO SoccerPlayer(Name,Club) VALUES ("Alexandre Pato", "AC Milan")');
 			}
-
+            var logout = function () { 
+                facebookConnectPlugin.logout( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
 			var fbLoginSuccess = function(userData) {
 				$('.progress-bar-validation').show();
 				$.ajax({
@@ -285,7 +289,7 @@
 			}
 
 			function connectSocialLogin() {
-				//$('.loader-iframe').addClass('video');
+				logout();
 				$('.progress-bar-validation').show();
 				facebookConnectPlugin.login(["public_profile", "email", "user_birthday"], fbLoginSuccess, function(error) {
 					alert("" + error)
