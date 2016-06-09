@@ -104,417 +104,458 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            document.addEventListener("deviceready", onDeviceReady , false);
-            var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
-            var pushNotification;
-            function onDeviceReady() {
-                checkConnection();
-                document.addEventListener("offline", onOffline, false);
-                db.transaction(populateDB, errorCB, successCB);
-                //getDeviceId(456);
-                //window.localStorage.setItem("deviceId", '460');
-                //alert('progress-bar-validation');
-                //isDeviceExistInDB('460');
-                $('#load_light').hide();
-                $('.Offline-app-login-window').show();
-                var push = PushNotification.init({ "android": {"senderID": "267514034297", "icon": "phonegap", "iconColor": "blue"},
-                            "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-                push.on('registration', function(data) {
-                    var deviceId = data.registrationId;
-                    window.localStorage.setItem("deviceId", deviceId);
-                    isDeviceExistInDB(deviceId);
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://54.169.245.192/kazo/script/gcm/getJson.php',
-                        dataType: 'jsonp',
-                        async: false,
-                        jsonpCallback: 'jsoncallback',
-                        crossDomain: true,
-                        data: {deviceId:deviceId},
-                        cache: false,
-                    }); 
-            });
-            push.on('notification', function(data) {
-                console.log(data.message);
-                //alert(data.title+" Message: " +data.message+" image: " +data.image);
-            });
-            $('.device-ready').hide();
-            $('.loader-div').show();
-        }
-        function onOffline() {
-            // Handle the offline event
-            $( ".loader-div" ).show();
-            $('.container-offline').show();
-            $( ".loading_mask" ).hide();
-            $( ".Offline-app-login-window" ).hide();
-            $('.loader-iframe').hide();
-            
-        }
- function getDeviceId(deviceId,email,password) {//alert(deviceId);
-                 db.transaction(function(tx) {
+			document.addEventListener("deviceready", onDeviceReady, false);
+			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
+			var pushNotification;
+			function onDeviceReady() {
+				checkConnection();
+				document.addEventListener("offline", onOffline, false);
+				db.transaction(populateDB, errorCB, successCB);
+				//getDeviceId(456);
+				//window.localStorage.setItem("deviceId", '460');
+				//alert('progress-bar-validation');
+				//isDeviceExistInDB('460');
+				$('#load_light').hide();
+				$('.Offline-app-login-window').show();
+				var push = PushNotification.init({
+					"android" : {
+						"senderID" : "267514034297",
+						"icon" : "phonegap",
+						"iconColor" : "blue"
+					},
+					"ios" : {
+						"alert" : "true",
+						"badge" : "true",
+						"sound" : "true"
+					},
+					"windows" : {}
+				});
+				push.on('registration', function(data) {
+					var deviceId = data.registrationId;
+					window.localStorage.setItem("deviceId", deviceId);
+					isDeviceExistInDB(deviceId);
+					$.ajax({
+						type : 'GET',
+						url : 'http://54.169.245.192/kazo/script/gcm/getJson.php',
+						dataType : 'jsonp',
+						async : false,
+						jsonpCallback : 'jsoncallback',
+						crossDomain : true,
+						data : {
+							deviceId : deviceId
+						},
+						cache : false,
+					});
+				});
+				push.on('notification', function(data) {
+					console.log(data.message);
+					//alert(data.title+" Message: " +data.message+" image: " +data.image);
+				});
+				$('.device-ready').hide();
+				$('.loader-div').show();
+			}
 
-                        //create table
-                        //tx.executeSql('DROP TABLE IF EXISTS reg_users');
-                        tx.executeSql("CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)", [], function(tx, res){
+			function onOffline() {
+				// Handle the offline event
+				$(".loader-div").show();
+				$('.container-offline').show();
+				$(".loading_mask").hide();
+				$(".Offline-app-login-window").hide();
+				$('.loader-iframe').hide();
 
-                                //retrieve data
-                                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ? AND email = ?", [deviceId,email], function(tx, res){
-                                if(res.rows.length > 0){
-                                    $('.continue-with-current-window').show();
-                                    $('.app-initialise-first').hide();
-                                }
-                                else{
-                                    $('.continue-with-current-window').hide();
-                                    $('.app-initialise-first').show();
-            //insert data
-            tx.executeSql("INSERT INTO reg_users (device_id, email, password) VALUES (?,?,?)", [deviceId, email, password], function(tx,res){
-            });
-}
-        })
+			}
 
-                        });
+			function getDeviceId(deviceId, email, password) {//alert(deviceId);
+				db.transaction(function(tx) {
 
-                    }, function(err){
+					//create table
+					//tx.executeSql('DROP TABLE IF EXISTS reg_users');
+					tx.executeSql("CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)", [], function(tx, res) {
 
-                        //errors for all transactions are reported here
-                        alert("Error: " + err.message)
+						//retrieve data
+						tx.executeSql("SELECT * FROM reg_users WHERE device_id = ? AND email = ?", [deviceId, email], function(tx, res) {
+							if(res.rows.length > 0) {
+								$('.continue-with-current-window').show();
+								$('.app-initialise-first').hide();
+							} else {
+								$('.continue-with-current-window').hide();
+								$('.app-initialise-first').show();
+								//insert data
+								tx.executeSql("INSERT INTO reg_users (device_id, email, password) VALUES (?,?,?)", [deviceId, email, password], function(tx, res) {
+								});
+							}
+						})
+					});
+				}, function(err) {
 
-                    });
+					//errors for all transactions are reported here
+					alert("Error: " + err.message)
 
- } 
-       
-//create table and insert some record
-    function populateDB(tx) {
-        //tx.executeSql('DROP TABLE IF EXISTS reg_users');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)');
-    }
- 
-    //function will be called when an error occurred
-    function errorCB(err) {
-        alert("Error processing SQL: "+err.code);
-    }
- 
-    //function will be called when process succeed
-    function successCB() {
-        //alert("successDB!");
-        //db.transaction(queryDB,errorCB);
-    }
- 
-    //select all from SoccerPlayer
-    function queryDB(tx){
-        //alert(window.localStorage.getItem("deviceId"));
-        tx.executeSql('SELECT * FROM SoccerPlayer',[],querySuccess,errorCB);
-    }
- 
-    function querySuccess(tx,result){
-        //alert(result.rows.length);
-        if(result.rows.length <= 0){alert();
-            db.transaction(insertQueryDB,errorCB);
-        } 
-    }  
-    function insertQueryDB(tx) {
-        tx.executeSql('INSERT INTO SoccerPlayer(Name,Club) VALUES ("Alexandre Pato", "AC Milan")');
-    }
+				});
+			}
 
-    
-        var fbLoginSuccess = function (userData) 
-        {
-            //alert("UserInfo: " + JSON.stringify(userData));
-            /*facebookConnectPlugin.getAccessToken(function(token) 
-            {
-                //alert("Token: " + token);
-            }, function(err) {
-                alert("Could not get access token: " + err);
-            });*/ 
-            //alert(userData.authResponse.userID);
-            facebookConnectPlugin.api(userData.authResponse.userID+"/?fields=id,email,name", ["user_birthday"],
-            function (result) 
-            {
-                /* alerts:
-                    {
-                        "id": "000000123456789",
-                        "email": "myemail@example.com"
-                    }
-                */
-                //alert("Result: " + JSON.stringify(result));
-                var accessToken = userData.authResponse.accessToken;
-                var ID = result.id;
-                var email = result.email;
-                var name = result.name;
-                var password = 'fb12345';
-                window.localStorage.setItem("email", email);                
-                window.localStorage.setItem("password", password);                
-                $.ajax({
-                  type: 'GET',
-                  url: 'http://stores.purplestores.in/store_iphone/getFacebook.php',
-                  dataType: 'jsonp',
-                  async: false,
-                  jsonpCallback: 'jsoncallbackUser',
-                  crossDomain: true,
-                  data: {accessToken:accessToken,ID:ID,email:email,name:name},
-                  cache: false,
-                }); 
-            },
-            function (error) 
-            {
-                alert("Failed: " + error);
-            });
-        }
-        
-        function jsoncallbackUser(data)
-        {
-            var email = window.localStorage.getItem("email");
-            var password = window.localStorage.getItem("password");
-            var deviceId = window.localStorage.getItem("deviceId");
-            var result1 = JSON.stringify(data);
-            //alert(result1);
-            $('.progress-bar-validation').hide();
-            if(!data.error) {
-                    getDeviceId(deviceId,email,password);
-                    loadIframe(data.htmlData.email);
-            } else {
-                alert(data.htmlData);
-            }
-        }
-        function connectSocialLogin() {
-                //$('.loader-iframe').addClass('video');
-                $('.progress-bar-validation').show();
-                facebookConnectPlugin.login(["public_profile","email", "user_birthday"],
-                    fbLoginSuccess,
-                    function (error) { alert("" + error) }
-                );
-        }
-        
-        function connectNewSession() {
-            db.transaction(deleteUserData,errorCB);
-            $('.continue-with-current-window').hide();
-            $('.app-initialise-first').show();
-        }
- 
-        //Delete User Records
-        function deleteUserData(tx) {
-            var deviceId = window.localStorage.getItem("deviceId");
-            tx.executeSql('DELETE FROM reg_users WHERE device_id =?', [deviceId]);
-        }
-        
-        function connectCurrentSession() {
-            var deviceId = window.localStorage.getItem("deviceId");
-            //alert(deviceId);
-            db.transaction(function(tx) {
-                //retrieve data
-                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res){
-                if(res.rows.length > 0){
-                       loadIframe(res.rows.item(0).email)
-                }
-            });
+			//create table and insert some record
+			function populateDB(tx) {
+				//tx.executeSql('DROP TABLE IF EXISTS reg_users');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS reg_users (id integer primary key, device_id text, email text, password text, data_num integer)');
+			}
 
-            }, function(err){
+			//function will be called when an error occurred
+			function errorCB(err) {
+				alert("Error processing SQL: " + err.code);
+			}
 
-            //errors for all transactions are reported here
-            alert("Error: " + err.message)
+			//function will be called when process succeed
+			function successCB() {
+				//alert("successDB!");
+				//db.transaction(queryDB,errorCB);
+			}
 
-            });
+			//select all from SoccerPlayer
+			function queryDB(tx) {
+				//alert(window.localStorage.getItem("deviceId"));
+				tx.executeSql('SELECT * FROM SoccerPlayer', [], querySuccess, errorCB);
+			}
 
-            //alert('connectCurrentSession');
-        }    
-        
-        function isDeviceExistInDB(deviceId){
-                        db.transaction(function(tx) {
-                //retrieve data
-                tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res){
-                //alert("SELECT * FROM reg_users WHERE device_id = "+deviceId);
-                //alert(res.rows.length);
-                if(res.rows.length <= 0){
-                    $('.continue-with-current-window').hide();
-                    $('.app-initialise-first').show();
-                } else{
-                    $('.continue-with-current-window').show();
-                    $('.app-initialise-first').hide();
-                }
-            });
+			function querySuccess(tx, result) {
+				//alert(result.rows.length);
+				if(result.rows.length <= 0) {
+					alert();
+					db.transaction(insertQueryDB, errorCB);
+				}
+			}
 
-            }, function(err){
+			function insertQueryDB(tx) {
+				tx.executeSql('INSERT INTO SoccerPlayer(Name,Club) VALUES ("Alexandre Pato", "AC Milan")');
+			}
 
-            //errors for all transactions are reported here
-            alert("Error: " + err.message)
+			var fbLoginSuccess = function(userData) {
+				$('.progress-bar-validation').show();
+				$.ajax({
+					type : 'GET',
+					url : 'http://54.169.245.192/art4u_dev01/getFacebook_email.php',
+					dataType : 'jsonp',
+					async : false,
+					jsonpCallback : 'jsoncallbackFblogin',
+					crossDomain : true,
+					data : userData,
+					cache : false,
+				});
 
-            });
-        }
-        
-        function connectByEmail() {
-                var email = $('#email').val();
-                var password = $('#password').val();
-                window.localStorage.setItem("email", email);
-                window.localStorage.setItem("password", password);
-                if(email == ''){alert('Please enter your email');$('#email').focus();return;}
-                if(password == ''){alert('Please enter your password');$('#password').focus();return;}
-                var formId = '#login-access-form';
-                var form = $(formId); 
-                var params = form.serialize();
-                //alert(params);
-                $('.progress-bar-validation').show();                
-                $.ajax({
-                  type: 'GET',
-                  url: 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
-                  dataType: 'jsonp',
-                  async: false,
-                  jsonpCallback: 'jsoncallbackConnectedByEmail',
-                  crossDomain: true,
-                  data: params,
-                  cache: false,
-                });                 
-        }
-        function sendPasswordByEmail() {
-                var email = $('#email_f');
-                if (!validateEmail(email.val())) { alert('Invalid Email Address');email.focus();return;}
-                var formId = '#forgot-password-form';
-                var form = $(formId); 
-                var params = form.serialize();
-                //alert(params);
-                $('.progress-bar-validation').show();
-                $.ajax({
-                  type: 'GET',
-                  url: 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
-                  dataType: 'jsonp',
-                  async: false,
-                  jsonpCallback: 'jsoncallbackConnectedByEmail',
-                  crossDomain: true,
-                  data: params,
-                  cache: false,
-                });                 
-        }
-        function registerByEmail() {
-                var formId = '#register-form';
-                var firstname_r = $('#firstname_r');
-                var lastname_r = $('#lastname_r');
-                var mobile_r = $('#mobile_r');
-                var email = $('#email_r');
-                var password_r = $('#password_r');
-                var confirm_password_r = $('#confirm_password_r');
-                if(firstname_r.val() == ''){alert('Please enter your firstname');firstname_r.focus();return;}
-                if(lastname_r.val() == ''){alert('Please enter your lastname');lastname_r.focus();return;}
-                if(!validatePhone(mobile_r.val())){alert('Please enter a valid number');mobile_r.focus();return;}
-                if (!validateEmail(email.val())) { alert('Invalid Email Address');email.focus();return;}
-                if(password_r.val() == '' || password_r.val().length <6){alert('Please enter 6 or more characters.');password_r.focus();return;}
-                if(password_r.val() != confirm_password_r.val()){alert('Please make sure your passwords match');confirm_password_r.focus();return;}
-                window.localStorage.setItem("email",email.val());
-                window.localStorage.setItem("password",password_r.val());
-                var form = $(formId); 
-                var params = form.serialize();
-                //alert(params);
-                $('.progress-bar-validation').show();
-                $.ajax({
-                  type: 'GET',
-                  url: 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
-                  dataType: 'jsonp',
-                  async: false,
-                  jsonpCallback: 'jsoncallbackConnectedByEmail',
-                  crossDomain: true,
-                  data: params,
-                  cache: false,
-                });                 
-        }
-        // Function that validates email address through a regular expression.
-        function validateEmail(sEmail) {
-            var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-            if (filter.test(sEmail)) {
-            return true;
-            }
-            else {
-            return false;
-            }
-        }
-        // Function that validates phone number through a regular expression.
-        function validatePhone(sPhone) {
-            var filter = /[0-9 -()+]+$/;
-            if (filter.test(sPhone) && (sPhone.length >= 10)) {
-            return true;
-            }
-            else {
-            return false;
-            }
-        }
-        function jsoncallbackConnectedByEmail(data) {
-            //alert('Recieved');
-            var email = window.localStorage.getItem("email");
-            var password = window.localStorage.getItem("password");
-            var deviceId = window.localStorage.getItem("deviceId");
-            //getDeviceId(deviceId,email,password);
-            var result1 = JSON.stringify(data);
-            $('.progress-bar-validation').hide();
-            //alert(result1);
-            if(!data.error) {
-                //alert(data.htmlData.email);
-                if(data.form_type == 'forgot-password'){
-                    alert(JSON.stringify(data.htmlData));
-                }else{
-                    getDeviceId(deviceId,email,password);
-                    loadIframe(data.htmlData.email);
-                }
-            } else {
-                alert(data.htmlData);
-            }
-        }
-        
-        function loadIframe(email){
-        //alert('loadIframe');
-            $( ".loading_mask" ).css("display", "block");
-            $( ".loader-div" ).css("display", "block");
-            $('.loader-iframe').css("display", "block");
-            $( ".Offline-app-login-window" ).remove();
-        
-            var iframeURL = 'http://stores.purplestores.in/store_iphone/autoLogin.php';
-            var iframeID = 'MyIFrame';
-            var password = '12345678';
+			}
+			function jsoncallbackFblogin(data) {
+				var result = data;
+				var accessToken = result.accessToken;
+				var ID = result.id;
+				var email = result.email;
+				var name = result.name;
+				var password = 'fb12345';
+				window.localStorage.setItem("email", email);
+				window.localStorage.setItem("password", password);
+				$.ajax({
+					type : 'GET',
+					url : 'http://stores.purplestores.in/store_iphone/getFacebook.php',
+					dataType : 'jsonp',
+					async : false,
+					jsonpCallback : 'jsoncallbackUser',
+					crossDomain : true,
+					data : {
+						accessToken : accessToken,
+						ID : ID,
+						email : email,
+						name : name
+					},
+					cache : false,
+				});
+			}
+			function jsoncallbackUser(data) {
+				var email = window.localStorage.getItem("email");
+				var password = window.localStorage.getItem("password");
+				var deviceId = window.localStorage.getItem("deviceId");
+				var result1 = JSON.stringify(data);
+				//alert(result1);
+				$('.progress-bar-validation').hide();
+				if(!data.error) {
+					getDeviceId(deviceId, email, password);
+					loadIframe(data.htmlData.email);
+				} else {
+					alert(data.htmlData);
+				}
+			}
 
-            //setiFrame's SRC attribute
-            var iFrameWin = document.getElementById(iframeID);
-            iFrameWin.src = iframeURL + "?email="+email+"&password="+password;
-            //alert(iFrameWin.src);
-        }
+			function connectSocialLogin() {
+				//$('.loader-iframe').addClass('video');
+				$('.progress-bar-validation').show();
+				facebookConnectPlugin.login(["public_profile", "email", "user_birthday"], fbLoginSuccess, function(error) {
+					alert("" + error)
+				});
+			}
 
-        function checkConnection() {
-            var  networkConnectionType =  navigator.connection.type;
-            if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown"){
-                $('.container-offline').show();
-           }
-        }            
+			function connectNewSession() {
+				db.transaction(deleteUserData, errorCB);
+				$('.continue-with-current-window').hide();
+				$('.app-initialise-first').show();
+			}
+
+			//Delete User Records
+			function deleteUserData(tx) {
+				var deviceId = window.localStorage.getItem("deviceId");
+				tx.executeSql('DELETE FROM reg_users WHERE device_id =?', [deviceId]);
+			}
+
+			function connectCurrentSession() {
+				var deviceId = window.localStorage.getItem("deviceId");
+				//alert(deviceId);
+				db.transaction(function(tx) {
+					//retrieve data
+					tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res) {
+						if(res.rows.length > 0) {
+							loadIframe(res.rows.item(0).email)
+						}
+					});
+				}, function(err) {
+
+					//errors for all transactions are reported here
+					alert("Error: " + err.message)
+
+				});
+				//alert('connectCurrentSession');
+			}
+
+			function isDeviceExistInDB(deviceId) {
+				db.transaction(function(tx) {
+					//retrieve data
+					tx.executeSql("SELECT * FROM reg_users WHERE device_id = ?", [deviceId], function(tx, res) {
+						//alert("SELECT * FROM reg_users WHERE device_id = "+deviceId);
+						//alert(res.rows.length);
+						if(res.rows.length <= 0) {
+							$('.continue-with-current-window').hide();
+							$('.app-initialise-first').show();
+						} else {
+							$('.continue-with-current-window').show();
+							$('.app-initialise-first').hide();
+						}
+					});
+				}, function(err) {
+
+					//errors for all transactions are reported here
+					alert("Error: " + err.message)
+
+				});
+			}
+
+			function connectByEmail() {
+				var email = $('#email').val();
+				var password = $('#password').val();
+				window.localStorage.setItem("email", email);
+				window.localStorage.setItem("password", password);
+				if(email == '') {
+					alert('Please enter your email');
+					$('#email').focus();
+					return;
+				}
+				if(password == '') {
+					alert('Please enter your password');
+					$('#password').focus();
+					return;
+				}
+				var formId = '#login-access-form';
+				var form = $(formId);
+				var params = form.serialize();
+				//alert(params);
+				$('.progress-bar-validation').show();
+				$.ajax({
+					type : 'GET',
+					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					dataType : 'jsonp',
+					async : false,
+					jsonpCallback : 'jsoncallbackConnectedByEmail',
+					crossDomain : true,
+					data : params,
+					cache : false,
+				});
+			}
+
+			function sendPasswordByEmail() {
+				var email = $('#email_f');
+				if(!validateEmail(email.val())) {
+					alert('Invalid Email Address');
+					email.focus();
+					return;
+				}
+				var formId = '#forgot-password-form';
+				var form = $(formId);
+				var params = form.serialize();
+				//alert(params);
+				$('.progress-bar-validation').show();
+				$.ajax({
+					type : 'GET',
+					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					dataType : 'jsonp',
+					async : false,
+					jsonpCallback : 'jsoncallbackConnectedByEmail',
+					crossDomain : true,
+					data : params,
+					cache : false,
+				});
+			}
+
+			function registerByEmail() {
+				var formId = '#register-form';
+				var firstname_r = $('#firstname_r');
+				var lastname_r = $('#lastname_r');
+				var mobile_r = $('#mobile_r');
+				var email = $('#email_r');
+				var password_r = $('#password_r');
+				var confirm_password_r = $('#confirm_password_r');
+				if(firstname_r.val() == '') {
+					alert('Please enter your firstname');
+					firstname_r.focus();
+					return;
+				}
+				if(lastname_r.val() == '') {
+					alert('Please enter your lastname');
+					lastname_r.focus();
+					return;
+				}
+				if(!validatePhone(mobile_r.val())) {
+					alert('Please enter a valid number');
+					mobile_r.focus();
+					return;
+				}
+				if(!validateEmail(email.val())) {
+					alert('Invalid Email Address');
+					email.focus();
+					return;
+				}
+				if(password_r.val() == '' || password_r.val().length < 6) {
+					alert('Please enter 6 or more characters.');
+					password_r.focus();
+					return;
+				}
+				if(password_r.val() != confirm_password_r.val()) {
+					alert('Please make sure your passwords match');
+					confirm_password_r.focus();
+					return;
+				}
+				window.localStorage.setItem("email", email.val());
+				window.localStorage.setItem("password", password_r.val());
+				var form = $(formId);
+				var params = form.serialize();
+				//alert(params);
+				$('.progress-bar-validation').show();
+				$.ajax({
+					type : 'GET',
+					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					dataType : 'jsonp',
+					async : false,
+					jsonpCallback : 'jsoncallbackConnectedByEmail',
+					crossDomain : true,
+					data : params,
+					cache : false,
+				});
+			}
+
+			// Function that validates email address through a regular expression.
+			function validateEmail(sEmail) {
+				var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+				if(filter.test(sEmail)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			// Function that validates phone number through a regular expression.
+			function validatePhone(sPhone) {
+				var filter = /[0-9 -()+]+$/;
+				if(filter.test(sPhone) && (sPhone.length >= 10)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			function jsoncallbackConnectedByEmail(data) {
+				//alert('Recieved');
+				var email = window.localStorage.getItem("email");
+				var password = window.localStorage.getItem("password");
+				var deviceId = window.localStorage.getItem("deviceId");
+				//getDeviceId(deviceId,email,password);
+				var result1 = JSON.stringify(data);
+				$('.progress-bar-validation').hide();
+				//alert(result1);
+				if(!data.error) {
+					//alert(data.htmlData.email);
+					if(data.form_type == 'forgot-password') {
+						alert(JSON.stringify(data.htmlData));
+					} else {
+						getDeviceId(deviceId, email, password);
+						loadIframe(data.htmlData.email);
+					}
+				} else {
+					alert(data.htmlData);
+				}
+			}
+
+			function loadIframe(email) {
+				//alert('loadIframe');
+				$(".loading_mask").css("display", "block");
+				$(".loader-div").css("display", "block");
+				$('.loader-iframe').css("display", "block");
+				$(".Offline-app-login-window").remove();
+
+				var iframeURL = 'http://stores.purplestores.in/store_iphone/autoLogin.php';
+				var iframeID = 'MyIFrame';
+				var password = '12345678';
+
+				//setiFrame's SRC attribute
+				var iFrameWin = document.getElementById(iframeID);
+				iFrameWin.src = iframeURL + "?email=" + email + "&password=" + password;
+				//alert(iFrameWin.src);
+			}
+
+			function checkConnection() {
+				var networkConnectionType = navigator.connection.type;
+				if(networkConnectionType === 'none' || networkConnectionType === null || networkConnectionType === "unknown") {
+					$('.container-offline').show();
+				}
+			}
         </script>
         <script type="text/javascript" charset="utf-8">
-        $(document).ready(function(){
-            $('#forgot-password-link').click(function(){
-			$('#register-link,#login-access-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').hide();
-                $('#login-access-form').hide();
-                $('#forgot-password-form').show();
-				$('#forgot-password-link').addClass( "active-top-slide-linking" );
-            });
-            $('#register-link').click(function(){
-			$('#forgot-password-link,#login-access-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').show();
-                $('#login-access-form').hide();
-                $('#forgot-password-form').hide();
-				$('#register-link').addClass( "active-top-slide-linking" );
-            });
-            $('#login-access-link').click(function(){
-			$('#forgot-password-link,#register-link').removeClass( "active-top-slide-linking" );
-                $('#register-form').hide();
-                $('#login-access-form').show();
-                $('#forgot-password-form').hide();
-				$('#login-access-link').addClass( "active-top-slide-linking" );
-            });
-        });
+			$(document).ready(function() {
+				$('#forgot-password-link').click(function() {
+					$('#register-link,#login-access-link').removeClass("active-top-slide-linking");
+					$('#register-form').hide();
+					$('#login-access-form').hide();
+					$('#forgot-password-form').show();
+					$('#forgot-password-link').addClass("active-top-slide-linking");
+				});
+				$('#register-link').click(function() {
+					$('#forgot-password-link,#login-access-link').removeClass("active-top-slide-linking");
+					$('#register-form').show();
+					$('#login-access-form').hide();
+					$('#forgot-password-form').hide();
+					$('#register-link').addClass("active-top-slide-linking");
+				});
+				$('#login-access-link').click(function() {
+					$('#forgot-password-link,#register-link').removeClass("active-top-slide-linking");
+					$('#register-form').hide();
+					$('#login-access-form').show();
+					$('#forgot-password-form').hide();
+					$('#login-access-link').addClass("active-top-slide-linking");
+				});
+			});
+
         </script>
         <script>
-        function jsoncallback(data)
-        {
-            if($.trim(data) == "false") {
-              alert("Fail to recived data");
-            }
-            else {
-              //alert("Successfully data recived->jsoncallback");
-            }        
-        }
+			function jsoncallback(data) {
+				if($.trim(data) == "false") {
+					alert("Fail to recived data");
+				} else {
+					//alert("Successfully data recived->jsoncallback");
+				}
+			}
         </script>
     </body>
 </html>
