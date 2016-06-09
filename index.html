@@ -230,8 +230,8 @@
 			}
             var logout = function () { 
                 facebookConnectPlugin.logout( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
+                    function (response) {  },
+                    function (response) {  });
             }
 			var fbLoginSuccess = function(userData) {
 				$('.progress-bar-validation').show();
@@ -281,6 +281,7 @@
 				//alert(result1);
 				$('.progress-bar-validation').hide();
 				if(!data.error) {
+					logout();
 					getDeviceId(deviceId, email, password);
 					loadIframe(data.htmlData.email);
 				} else {
@@ -289,7 +290,7 @@
 			}
 
 			function connectSocialLogin() {
-				logout();
+				
 				$('.progress-bar-validation').show();
 				facebookConnectPlugin.login(["public_profile", "email", "user_birthday"], fbLoginSuccess, function(error) {
 					alert("" + error)
