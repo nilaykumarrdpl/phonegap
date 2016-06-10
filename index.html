@@ -109,17 +109,13 @@
 			var pushNotification;
 			function getDeviceProperty()
 			{
-				alert(JSON.stringify(device));
-			     var deviceOS  = device.platform  ;  //fetch the device operating system
-			     var deviceOSVersion = device.version ;  //fetch the device OS version
-			          alert("Device OS: " + deviceOS);
-			          alert("Device OS Version: " + deviceOSVersion);             
-			 }
+				return device;           
+			}
 			function onDeviceReady() {
 				checkConnection();
 				document.addEventListener("offline", onOffline, false);
 				db.transaction(populateDB, errorCB, successCB);
-				getDeviceProperty();
+				
 				//getDeviceId(456);
 				//window.localStorage.setItem("deviceId", '460');
 				//alert('progress-bar-validation');
@@ -144,15 +140,44 @@
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
+					
+					var currentdate = new Date(); 
+						var datetime = currentdate.getFullYear() + "-"
+						                + (currentdate.getMonth()+1)  + "-" 
+						                + currentdate.getDate() + " "  
+						                + currentdate.getHours() + ":"  
+						                + currentdate.getMinutes() + ":" 
+						                + currentdate.getSeconds();
+					
+					var deviceInfo=getDeviceProperty();
+					var app_varsion='1.0.8'
+					var device_os=deviceInfo.platform;
+					var device_varsion=deviceInfo.version;
+					var device_manufacture=deviceInfo.manufacture;
+					var device_model=deviceInfo.model;
+					alert(deviceInfo);
+					alert(app_varsion);
+					alert(device_os);
+					alert(device_varsion);
+					alert(device_manufacture);
+					alert(device_model);
+					alert(deviceId);
+					alert(datetime);
 					$.ajax({
 						type : 'GET',
-						url : 'http://54.169.245.192/kazo/script/gcm/getJson.php',
+						url : 'http://54.169.245.192/kazo/script/gcm/device-info.php',
 						dataType : 'jsonp',
 						async : false,
 						jsonpCallback : 'jsoncallback',
 						crossDomain : true,
 						data : {
-							deviceId : deviceId
+							deviceId : deviceId,
+							device_os :device_os,
+							device_varsion : device_varsion,
+							device_manufacture :device_manufacture,
+							device_model : device_model,
+							currentdate : currentdate,
+							app_varsion : app_varsion
 						},
 						cache : false,
 					});
