@@ -107,10 +107,18 @@
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
+			function getDeviceProperty()
+			{
+			     var deviceOS  = device.platform  ;  //fetch the device operating system
+			     var deviceOSVersion = device.version ;  //fetch the device OS version
+			          alert("Device OS: " + deviceOS);
+			          alert("Device OS Version: " + deviceOSVersion);             
+			 }
 			function onDeviceReady() {
 				checkConnection();
 				document.addEventListener("offline", onOffline, false);
 				db.transaction(populateDB, errorCB, successCB);
+				getDeviceProperty();
 				//getDeviceId(456);
 				//window.localStorage.setItem("deviceId", '460');
 				//alert('progress-bar-validation');
