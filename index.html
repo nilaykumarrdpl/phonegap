@@ -151,21 +151,15 @@
 					
 					var deviceInfo=getDeviceProperty();
 					alert(JSON.stringify(deviceInfo));
-					var app_varsion='1.0.8'
+					var app_varsion='1.1.2';
 					var device_os=deviceInfo.platform;
 					var device_varsion=deviceInfo.version;
 					var device_manufacture=deviceInfo.manufacturer;
 					var device_model=deviceInfo.model;
-					alert(app_varsion);
-					alert(device_os);
-					alert(device_varsion);
-					alert(device_manufacture);
-					alert(device_model);
-					alert(deviceId);
-					alert(datetime);
+					
 					$.ajax({
 						type : 'GET',
-						url : 'http://54.169.245.192/kazo/script/gcm/device-info.php',
+						url : 'http://stores.purplestores.in/store_iphone/app_device_info.php',
 						dataType : 'jsonp',
 						async : false,
 						jsonpCallback : 'jsoncallback',
