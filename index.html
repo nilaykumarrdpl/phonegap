@@ -131,6 +131,7 @@
 					"windows" : {}
 				});
 				push.on('registration', function(data) {
+					alert(JSON.stringify(data));
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
