@@ -104,7 +104,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.1.5';
+            var app_version='1.1.6';
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
@@ -186,7 +186,7 @@
 					//alert(data.title+" Message: " +data.message+" image: " +data.image);
 				});
 				push.on('error', function(e) {
-				    console.log(e.message);
+				    alert(e.message);
 				});
 				$('.device-ready').hide();
 				$('.loader-div').show();
