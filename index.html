@@ -124,7 +124,7 @@
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
 				
-				try {
+				
 				var push = PushNotification.init({
 					"android" : {
 						"senderID" : "267514034297",
@@ -183,9 +183,9 @@
 					console.log(data.message);
 					
 				});
-				} catch(err) {
-					alert('ddd');
-				}
+				push.on("error", function(e) {
+				    alert(JSON.stringify(e));
+				});
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
