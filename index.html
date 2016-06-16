@@ -123,7 +123,8 @@
 				//isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
-				alert(JSON.stringify(getDeviceProperty()));
+				
+				try {
 				var push = PushNotification.init({
 					"android" : {
 						"senderID" : "267514034297",
@@ -182,6 +183,9 @@
 					console.log(data.message);
 					
 				});
+				} catch(err) {
+					alert('ddd');
+				}
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
