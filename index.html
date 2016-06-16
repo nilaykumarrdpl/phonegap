@@ -114,12 +114,7 @@
 			{
 				return device;           
 			}
-			function setIsNotify(deviceid){
-				alert(is_notyfy)
-				is_notyfy=true;
-				alert(is_notyfy);
-				alert(deviceid);
-			}
+			
 			function onDeviceReady() {
 				checkConnection();
 				document.addEventListener("offline", onOffline, false);
@@ -151,7 +146,7 @@
 				push.on('registration', function(data) {
 					
 					var deviceId = data.registrationId;
-					setIsNotify(deviceId);
+					
 					window.localStorage.setItem("deviceId", deviceId);
 					
 					
@@ -197,8 +192,7 @@
 				});
 				
 				var deviceId1 = window.localStorage.getItem("deviceId");
-				alert(is_notyfy);
-				alert(deviceId1);
+				
 				isDeviceExistInDB(deviceId1);
 				$('.device-ready').hide();
 				$('.loader-div').show();
