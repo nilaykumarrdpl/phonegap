@@ -104,7 +104,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.1.6';
+            var app_version='1.1.7';
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
@@ -112,16 +112,7 @@
 			{
 				return device;           
 			}
-			function success(uuid)
-			{
-			    alert(uuid);
-			}
-			function fail(uuid)
-			{
-			    alert(uuid);
-			}
 			function onDeviceReady() {
-				window.plugins.uniqueDeviceID.get(success, fail);
 				checkConnection();
 				document.addEventListener("offline", onOffline, false);
 				db.transaction(populateDB, errorCB, successCB);
@@ -132,6 +123,7 @@
 				//isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
+				alert(JSON.stringify(getDeviceProperty()));
 				var push = PushNotification.init({
 					"android" : {
 						"senderID" : "267514034297",
@@ -188,14 +180,7 @@
 				});
 				push.on('notification', function(data) {
 					console.log(data.message);
-					//alert(data.title+" Message: " +data.message+" image: " +data.image);
-				});
-				push.off('notification', function(data) {
-					console.log(data.message);
-					//alert(data.title+" Message: " +data.message+" image: " +data.image);
-				});
-				push.on('error', function(e) {
-				    alert(e.message);
+					
 				});
 				$('.device-ready').hide();
 				$('.loader-div').show();
