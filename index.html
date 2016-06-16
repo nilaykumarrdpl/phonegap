@@ -153,7 +153,7 @@
 					var deviceId = data.registrationId;
 					setIsNotify(deviceId);
 					//window.localStorage.setItem("deviceId", deviceId);
-					//isDeviceExistInDB(deviceId);
+					
 					
 					var currentdate = new Date(); 
 					var datetime = currentdate.getFullYear() + "-"
@@ -199,7 +199,7 @@
 				var deviceId_1 = window.localStorage.getItem("deviceId");
 				alert(is_notyfy);
 				alert(deviceId_1);
-				
+				isDeviceExistInDB(deviceId);
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
