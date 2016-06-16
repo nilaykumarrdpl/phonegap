@@ -104,7 +104,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.1.6';
+            var app_version='1.1.7';
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
@@ -123,71 +123,8 @@
 				//isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
-				var push = PushNotification.init({
-					"android" : {
-						"senderID" : "267514034297",
-						"icon" : "phonegap",
-						"iconColor" : "blue"
-					},
-					"ios" : {
-						"alert" : "true",
-						"badge" : "true",
-						"sound" : "true"
-					},
-					"windows" : {}
-				});
 				
 				
-				push.on('registration', function(data) {
-					
-					var deviceId = data.registrationId;
-					window.localStorage.setItem("deviceId", deviceId);
-					isDeviceExistInDB(deviceId);
-					
-					var currentdate = new Date(); 
-					var datetime = currentdate.getFullYear() + "-"
-						                + (currentdate.getMonth()+1)  + "-" 
-						                + currentdate.getDate() + " "  
-						                + currentdate.getHours() + ":"  
-						                + currentdate.getMinutes() + ":" 
-						                + currentdate.getSeconds();
-					window.localStorage.setItem("datetime", datetime);
-					var deviceInfo=getDeviceProperty();
-					var device_os=deviceInfo.platform;
-					var device_os_version=deviceInfo.version;
-					var device_manufacture=deviceInfo.manufacturer;
-					var device_model=deviceInfo.model;
-					
-					$.ajax({
-						type : 'GET',
-						url : 'http://stores.purplestores.in/store_iphone/app_device_info.php',
-						dataType : 'jsonp',
-						async : false,
-						jsonpCallback : 'jsoncallback',
-						crossDomain : true,
-						data : {
-							deviceId : deviceId,
-							device_os :device_os,
-							device_os_version : device_os_version,
-							device_manufacture :device_manufacture,
-							device_model : device_model,
-							currentdate : datetime,
-							app_version : app_version
-						},
-						cache : false,
-					});
-				});
-				push.on('notification', function(data) {
-					console.log(data.message);
-					//alert(data.title+" Message: " +data.message+" image: " +data.image);
-				});
-				push.off('notification', function(data) {
-					console.log(data.message);
-					//alert(data.title+" Message: " +data.message+" image: " +data.image);
-				});
-				push.on('error', function(e) {
-				    alert(e.message);
-				});
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
