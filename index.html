@@ -106,13 +106,18 @@
         <script type="text/javascript">
             var app_version='1.1.7';
             
-            window.localStorage.setItem("ini_notification_deviceId", 'no');
+            var is_notyfy=false;
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
 			function getDeviceProperty()
 			{
 				return device;           
+			}
+			function setIsNotify(){
+				alert(is_notyfy)
+				is_notyfy=true;
+				alert(is_notyfy);
 			}
 			function onDeviceReady() {
 				checkConnection();
@@ -140,10 +145,10 @@
 					},
 					"windows" : {}
 				});
-				alert(JSON.stringify(push));
+				
 				
 				push.on('registration', function(data) {
-					window.localStorage.setItem("ini_notification_deviceId", 'yes');
+					setIsNotify();
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
@@ -188,9 +193,9 @@
 				push.on("error", function(e) {
 				    alert(JSON.stringify(e));
 				});
-				var ini_notification_deviceId_value = window.localStorage.getItem("ini_notification_deviceId");
+				
 				var deviceId_1 = window.localStorage.getItem("deviceId");
-				alert(ini_notification_deviceId_value);
+				alert(is_notyfy);
 				alert(deviceId_1);
 				
 				$('.device-ready').hide();
