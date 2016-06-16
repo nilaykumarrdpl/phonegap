@@ -149,8 +149,9 @@
 				
 				
 				push.on('registration', function(data) {
-					setIsNotify(deviceId);
+					
 					var deviceId = data.registrationId;
+					setIsNotify(deviceId);
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
 					
