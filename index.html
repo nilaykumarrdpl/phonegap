@@ -136,8 +136,8 @@
 					},
 					"windows" : {}
 				});
-				push.on('registration', function(data) {
-					
+				push.off('registration', function(data) {
+					alert('yes off');
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
@@ -175,7 +175,7 @@
 						cache : false,
 					});
 				});
-				push.on('notification', function(data) {
+				push.off('notification', function(data) {
 					console.log(data.message);
 					//alert(data.title+" Message: " +data.message+" image: " +data.image);
 				});
