@@ -136,8 +136,13 @@
 					},
 					"windows" : {}
 				});
-				push.off('registration', function(data) {
-					alert('yes off');
+				PushNotification.hasPermission(function(data) {
+				    if (data.isEnabled) {
+				        alert('isEnabled');
+				    }
+				});
+				push.on('registration', function(data) {
+					
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
@@ -175,10 +180,11 @@
 						cache : false,
 					});
 				});
-				push.off('notification', function(data) {
+				push.on('notification', function(data) {
 					console.log(data.message);
 					//alert(data.title+" Message: " +data.message+" image: " +data.image);
 				});
+				
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
