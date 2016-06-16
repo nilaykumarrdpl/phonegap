@@ -105,6 +105,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             var app_version='1.1.7';
+            var ini_notification_deviceId=false;
 			document.addEventListener("deviceready", onDeviceReady, false);
 			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
 			var pushNotification;
@@ -138,10 +139,10 @@
 					},
 					"windows" : {}
 				});
-				
+				alert(push);
 				
 				push.on('registration', function(data) {
-					
+					ini_notification_deviceId=true;
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
@@ -186,6 +187,9 @@
 				push.on("error", function(e) {
 				    alert(JSON.stringify(e));
 				});
+				
+				alert(ini_notification_deviceId);
+				
 				$('.device-ready').hide();
 				$('.loader-div').show();
 			}
