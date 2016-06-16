@@ -114,10 +114,11 @@
 			{
 				return device;           
 			}
-			function setIsNotify(){
+			function setIsNotify(deviceid){
 				alert(is_notyfy)
 				is_notyfy=true;
 				alert(is_notyfy);
+				alert(deviceid);
 			}
 			function onDeviceReady() {
 				checkConnection();
@@ -148,7 +149,7 @@
 				
 				
 				push.on('registration', function(data) {
-					setIsNotify();
+					setIsNotify(deviceId);
 					var deviceId = data.registrationId;
 					window.localStorage.setItem("deviceId", deviceId);
 					isDeviceExistInDB(deviceId);
