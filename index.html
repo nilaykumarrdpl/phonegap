@@ -136,6 +136,12 @@
 					},
 					"windows" : {}
 				});
+				
+				PushNotification.hasPermission(function(data) {
+				    if (data.isEnabled) {
+				        alert('dd');
+				    }
+				});
 				push.on('registration', function(data) {
 					
 					var deviceId = data.registrationId;
