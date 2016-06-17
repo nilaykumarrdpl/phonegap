@@ -104,7 +104,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.1.7';
+            var app_version='1.2.4';
             
             var is_notyfy=false;
 			document.addEventListener("deviceready", onDeviceReady, false);
@@ -121,9 +121,9 @@
 				db.transaction(populateDB, errorCB, successCB);
 				
 				//getDeviceId(456);
-				//window.localStorage.setItem("deviceId", '460');
+				window.localStorage.setItem("deviceId", '460');
 				//alert('progress-bar-validation');
-				//isDeviceExistInDB('460');
+				isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
 				
@@ -163,7 +163,7 @@
 					var device_os_version=deviceInfo.version;
 					var device_manufacture=deviceInfo.manufacturer;
 					var device_model=deviceInfo.model;
-					
+					var device_uuid=deviceInfo.uuid;
 					$.ajax({
 						type : 'GET',
 						url : 'http://stores.purplestores.in/store_iphone/app_device_info.php',
@@ -178,7 +178,8 @@
 							device_manufacture :device_manufacture,
 							device_model : device_model,
 							currentdate : datetime,
-							app_version : app_version
+							app_version : app_version,
+							device_uuid : device_uuid
 						},
 						cache : false,
 					});
@@ -559,15 +560,17 @@
 				var password = '12345678';
 				
 				var deviceInfo=getDeviceProperty();
+				
 				var device_os=deviceInfo.platform;
 				var device_os_version=deviceInfo.version;
 				var device_manufacture=deviceInfo.manufacturer;
 				var device_model=deviceInfo.model;
+				var device_uuid=deviceInfo.uuid;
 				var deviceId = window.localStorage.getItem("deviceId");
 				var datetime = window.localStorage.getItem("datetime");
 				//setiFrame's SRC attribute
 				var iFrameWin = document.getElementById(iframeID);
-				iFrameWin.src = iframeURL + "?email=" + email + "&password=" + password + "&deviceId=" + deviceId+ "&device_os=" + device_os+ "&device_os_version=" + device_os_version+"&device_manufacture=" + device_manufacture+"&device_model="+device_model+"&currentdate="+datetime+"&app_version="+app_version;
+				iFrameWin.src = iframeURL + "?email=" + email + "&password=" + password + "&deviceId=" + deviceId+ "&device_os=" + device_os+ "&device_os_version=" + device_os_version+"&device_manufacture=" + device_manufacture+"&device_model="+device_model+"&currentdate="+datetime+"&app_version="+app_version+"&device_uuid="+device_uuid;
 				//alert(iFrameWin.src);
 			}
 
