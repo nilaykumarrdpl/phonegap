@@ -104,7 +104,7 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.2.4';
+            var app_version='1.2.5';
             
             var is_notyfy=false;
 			document.addEventListener("deviceready", onDeviceReady, false);
@@ -121,9 +121,9 @@
 				db.transaction(populateDB, errorCB, successCB);
 				
 				//getDeviceId(456);
-				window.localStorage.setItem("deviceId", '460');
+				//window.localStorage.setItem("deviceId", '460');
 				//alert('progress-bar-validation');
-				isDeviceExistInDB('460');
+				//isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
 				
