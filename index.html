@@ -27,7 +27,7 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Purple Stores App</title>
+        <title>Beebay Online App</title>
         <link rel="apple-touch-icon" href="icon.png">
     </head>
     <body>   
@@ -37,7 +37,7 @@
                   <div class="header-language-container">
                     <div class="header-main-part">
                       <div class="header-main-inner-sects">
-                        Purple Stores
+                        Beebay Online
                       </div>
                     </div>
                   </div>
@@ -104,11 +104,11 @@
         <script type="text/javascript" src="cordova.js"></script>  
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            var app_version='1.2.5';
+            var app_version='1.0.0';
             
             var is_notyfy=false;
 			document.addEventListener("deviceready", onDeviceReady, false);
-			var db = window.openDatabase("HIGHSTREET_DB", "1.0", "Just a HIGHSTREET DB", 200000);
+			var db = window.openDatabase("BEEBAYONLINE_DB", "1.0", "Just a BEEBAYONLINE DB", 200000);
 			var pushNotification;
 			function getDeviceProperty()
 			{
@@ -116,14 +116,16 @@
 			}
 			
 			function onDeviceReady() {
-				checkConnection();
+				
+				//checkConnection();
+				
 				document.addEventListener("offline", onOffline, false);
 				db.transaction(populateDB, errorCB, successCB);
 				
 				//getDeviceId(456);
 				//window.localStorage.setItem("deviceId", '460');
-				//alert('progress-bar-validation');
-				//isDeviceExistInDB('460');
+				 //alert('progress-bar-validation');
+			    // isDeviceExistInDB('460');
 				$('#load_light').hide();
 				$('.Offline-app-login-window').show();
 				
@@ -166,7 +168,7 @@
 					var device_uuid=deviceInfo.uuid;
 					$.ajax({
 						type : 'GET',
-						url : 'http://stores.purplestores.in/store_iphone/app_device_info.php',
+						url : 'http://54.169.245.192/beebay/app_device_info.php',
 						dataType : 'jsonp',
 						async : false,
 						jsonpCallback : 'jsoncallback',
@@ -278,6 +280,7 @@
                     function (response) {  });
             }
 			var fbLoginSuccess = function(userData) {
+				alert(userData);
 				$('.progress-bar-validation').show();
 				$.ajax({
 					type : 'GET',
@@ -303,7 +306,7 @@
 				window.localStorage.setItem("password", password);
 				$.ajax({
 					type : 'GET',
-					url : 'http://stores.purplestores.in/store_iphone/getFacebook.php',
+					url : 'http://54.169.245.192/beebay/getFacebook.php',
 					dataType : 'jsonp',
 					async : false,
 					jsonpCallback : 'jsoncallbackUser',
@@ -416,7 +419,7 @@
 				$('.progress-bar-validation').show();
 				$.ajax({
 					type : 'GET',
-					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					url : 'http://54.169.245.192/beebay/connectedByEmail.php',
 					dataType : 'jsonp',
 					async : false,
 					jsonpCallback : 'jsoncallbackConnectedByEmail',
@@ -440,7 +443,7 @@
 				$('.progress-bar-validation').show();
 				$.ajax({
 					type : 'GET',
-					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					url : 'http://54.169.245.192/beebay/connectedByEmail.php',
 					dataType : 'jsonp',
 					async : false,
 					jsonpCallback : 'jsoncallbackConnectedByEmail',
@@ -496,7 +499,7 @@
 				$('.progress-bar-validation').show();
 				$.ajax({
 					type : 'GET',
-					url : 'http://stores.purplestores.in/store_iphone/connectedByEmail.php',
+					url : 'http://54.169.245.192/beebay/connectedByEmail.php',
 					dataType : 'jsonp',
 					async : false,
 					jsonpCallback : 'jsoncallbackConnectedByEmail',
@@ -527,7 +530,7 @@
 			}
 
 			function jsoncallbackConnectedByEmail(data) {
-				//alert('Recieved');
+				alert('Recieved');
 				var email = window.localStorage.getItem("email");
 				var password = window.localStorage.getItem("password");
 				var deviceId = window.localStorage.getItem("deviceId");
@@ -555,7 +558,7 @@
 				$('.loader-iframe').css("display", "block");
 				$(".Offline-app-login-window").remove();
 
-				var iframeURL = 'http://stores.purplestores.in/store_iphone/autoLogin.php';
+				var iframeURL = 'http://54.169.245.192/beebay/autoLogin.php';
 				var iframeID = 'MyIFrame';
 				var password = '12345678';
 				
@@ -571,7 +574,7 @@
 				//setiFrame's SRC attribute
 				var iFrameWin = document.getElementById(iframeID);
 				iFrameWin.src = iframeURL + "?email=" + email + "&password=" + password + "&deviceId=" + deviceId+ "&device_os=" + device_os+ "&device_os_version=" + device_os_version+"&device_manufacture=" + device_manufacture+"&device_model="+device_model+"&currentdate="+datetime+"&app_version="+app_version+"&device_uuid="+device_uuid;
-				//alert(iFrameWin.src);
+				
 			}
 
 			function checkConnection() {

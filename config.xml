@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.highstreet" version="1.2.5">
-  <name>Purple Stores App</name>
-  <description>Download the App to experience all new way of shopping that Purple Stores offers via the App. It has host of features that allows merchants to offer personalized and specific offers to the users. Some of the features include - login using facebook /Google session on the device. Push notifications to individual/grouped users allowing for targeted and personalized campaigns.</description>
-  <author email="development@purplecommerce.com" href="http://purplestores.in">Purple Commerce</author>
+  <name>Beebay Online App</name>
+  <description>Download the App to experience all new way of shopping that Beebay Online offers via the App. It has host of features that allows merchants to offer personalized and specific offers to the users. Some of the features include - login using facebook /Google session on the device. Push notifications to individual/grouped users allowing for targeted and personalized campaigns.</description>
+  <author email="development@purplecommerce.com" href="http://purplestores.in">Beebay Online</author>
   <content src="index.html" />
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="portrait" />
@@ -17,10 +17,10 @@
   <gap:plugin name="org.apache.cordova.media"/>
   <gap:plugin name="org.apache.cordova.network-information" spec="0.2.15" source="pgb"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
-  <gap:plugin name="phonegap-plugin-push" source="npm" version="1.2.3" />
+  <gap:plugin name="phonegap-plugin-push" source="npm" version="1.0.1" />
   <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
         <param name="APP_ID" value="591888654311570" />
-        <param name="APP_NAME" value="purple stores" />
+        <param name="APP_NAME" value="Beebay Online" />
   </gap:plugin>  
   <icon src="icon.png" gap:role="default" />
   <icon src="res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
