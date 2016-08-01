@@ -18,13 +18,7 @@
   <gap:plugin name="org.apache.cordova.network-information" spec="0.2.15" source="pgb"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
     
-  <gap:plugin name="phonegap-plugin-push" source="npm">
-    <param name="SENDER_ID" value="267514034297" />
-  </gap:plugin>
-  <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
-        <param name="APP_ID" value="591888654311570" />
-        <param name="APP_NAME" value="Beebay Online" />
-  </gap:plugin>  
+ 
   <icon src="icon.png" gap:role="default" />
   <icon src="res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
